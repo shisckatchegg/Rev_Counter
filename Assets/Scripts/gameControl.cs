@@ -1,9 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class gameControl
+﻿
+public class GameControl
 {
+	private TurnControl _turnControl;
+
+	private int _turnNumber;
+
+	public void ProcessGame()
+	{
+		_turnControl.ProcessTurn();
+		_turnNumber++;
+	}
+
 
 }
 
@@ -15,7 +22,7 @@ public class TurnControl
 
 	public PlayerStatProcesser _playerStats;
 
-	public void RefreshTurn()
+	public void ProcessTurn()
 	{
 		_cityStats.Update();
 

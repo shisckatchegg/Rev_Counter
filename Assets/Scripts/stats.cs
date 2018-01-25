@@ -18,7 +18,7 @@ public class PopulationStats
 }
 
 
-public class stats : MonoBehaviour {
+public class Stats : MonoBehaviour {
 
 	private PopulationStats _stats;
 

@@ -13,7 +13,7 @@ public class TurnControl
 
 	public UnitStatProcesser _unitStats;
 
-	public PlayerStatPRocesser _playerStats;
+	public PlayerStatProcesser _playerStats;
 
 	public void RefreshTurn()
 	{

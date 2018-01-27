@@ -18,7 +18,14 @@ public class PopulationStats
 
 	public int Control;							//Bitmask: 0 neutral, 1 player 1, 2 player 2, 4 player 3, 8 player 4...
 
-	public List<float> FactionsSupport;			//Sum of all factions support must be 1
+	[SerializeField]
+	private List<float> _factionsSupport;			//Sum of all factions support must be 1
+
+	public List<float> FactionsSupport
+	{
+		get { return _factionsSupport; }
+		set { _factionsSupport = value; }
+	}
 
 	public int Population;
 
@@ -45,8 +52,11 @@ public class PopulationStats
 
 	private void SupportDecay()
 	{
-		Debug.Assert(FactionsSupport == null, "Population node: " +  PopulationNodeName + " faction support list is null!");
-		
+		if (FactionsSupport == null)
+		{
+			Debug.Assert(FactionsSupport == null, "Population node: " + PopulationNodeName + " faction support list is null!");
+		}
+
 		Stack<int> factionIndecesUnderSafeSupportLimit = new Stack<int>();
 		
 		//All factions over a certain support threshold have it decay

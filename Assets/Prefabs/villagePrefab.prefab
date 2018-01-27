@@ -55,7 +55,9 @@ MonoBehaviour:
   Stats:
     PopulationNodeName: Tale
     Control: 1
-    FactionsSupport: []
+    _factionsSupport:
+    - 0.75
+    - 0.25
     Population: 2314
     RecruitmentSlots: 1
     Type: 0

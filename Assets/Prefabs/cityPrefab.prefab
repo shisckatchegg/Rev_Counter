@@ -55,7 +55,9 @@ MonoBehaviour:
   Stats:
     PopulationNodeName: Kakariko
     Control: 2
-    FactionsSupport: []
+    _factionsSupport:
+    - 0.75
+    - 0.25
     Population: 9840
     RecruitmentSlots: 2
     Type: 1

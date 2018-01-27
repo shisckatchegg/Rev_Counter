@@ -151,6 +151,16 @@ Prefab:
       propertyPath: m_Name
       value: village
       objectReference: {fileID: 0}
+    - target: {fileID: 114888476260425328, guid: b03496f413c7d8248a2d1763a2a99e5e,
+        type: 2}
+      propertyPath: Stats._factionsSupport.Array.data[1]
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114888476260425328, guid: b03496f413c7d8248a2d1763a2a99e5e,
+        type: 2}
+      propertyPath: Stats._factionsSupport.Array.data[0]
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b03496f413c7d8248a2d1763a2a99e5e, type: 2}
   m_IsPrefabParent: 0

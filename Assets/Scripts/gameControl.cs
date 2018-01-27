@@ -10,6 +10,7 @@ public class GameControl : MonoBehaviour
 	private void Start()
 	{
 		_turnControl = new TurnControl();
+		_turnControl.InitializeProcessers();
 	}
 
 	public void ProcessGame()
@@ -34,6 +35,13 @@ internal class TurnControl
 		_cityStats = new CityStatProcesser();
 		_unitStats = new UnitStatProcesser();
 		_playerStats = new PlayerStatProcesser();
+	}
+
+	public void InitializeProcessers()
+	{
+		_cityStats.Initialize();
+		_unitStats.Initialize();
+		_playerStats.Initialize();
 	}
 
 	public void ProcessTurn()

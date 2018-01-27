@@ -131,8 +131,9 @@ public class PopulationNodeStats : MonoBehaviour {
 		Stats.Update();
 
 		Debug.Log("City: " + Stats.PopulationNodeName + " current population: " + Stats.Population);
-		Debug.Log("City: " + Stats.PopulationNodeName + " support for faction 2: " + Stats.FactionsSupport[1]);
 		Debug.Log("City: " + Stats.PopulationNodeName + " support for faction 1: " + Stats.FactionsSupport[0]);
+		Debug.Log("City: " + Stats.PopulationNodeName + " support for faction 2: " + Stats.FactionsSupport[1]);
+
 	}
 
 	// Update is called once per frame

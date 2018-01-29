@@ -5,12 +5,12 @@ public class PopulationNodeController : MonoBehaviour {
 
 	private PopulationNodeStats _populationNodeStats;
 
-	private Text _populationNodeStatDisplay;
+	private TextMesh _populationNodeStatDisplay;
 
 	// Use this for initialization
 	void Start () {
 		_populationNodeStats = GetComponent<PopulationNodeStats>();
-		_populationNodeStatDisplay = GetComponentInChildren<Text>();
+		_populationNodeStatDisplay = GetComponentInChildren<TextMesh>();
 	}
 	
 	// Update is called once per frame

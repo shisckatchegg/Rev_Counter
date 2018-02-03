@@ -16,7 +16,7 @@ public class PopulationStats
 {
 	public string PopulationNodeName;
 
-	public int Control;							//Bitmask: 0 neutral, 1 player 1, 2 player 2, 4 player 3, 8 player 4...
+	public int Control;							
 
 	[SerializeField]
 	private List<float> _factionsSupport;			//Sum of all factions support must be 1

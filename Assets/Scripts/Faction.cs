@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Faction : MonoBehaviour {
-
+public class Faction
+{
 	public Globals.FactionNames FactionId;
 
 	public List<GameObject> ControlledPopulationNodes;
@@ -21,12 +20,17 @@ public class Faction : MonoBehaviour {
 	void Start ()
 	{
 		ControlledPopulationNodes = new List<GameObject>();
-
+		ControlledMilitary = new List<GameObject>();
+		ControlledSpies = new List<GameObject>();
+		FactionRelationShips = new int[(int) Globals.FactionNames.NumberOfFactions];
+		
 		CollectControlledPopulationNodes();
+		CollectControlledUnits();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 	}
 
@@ -45,6 +49,25 @@ public class Faction : MonoBehaviour {
 	}
 
 	private void CollectControlledUnits()
+	{
+		CollectControlledSpies();
+
+		CollectControlledMilitary();
+
+		CollectControlledLeader();
+	}
+
+	private void CollectControlledSpies()
+	{
+
+	}
+
+	private void CollectControlledMilitary()
+	{
+
+	}
+
+	private void CollectControlledLeader()
 	{
 
 	}

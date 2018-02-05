@@ -16,5 +16,5 @@ public static class Globals
 		NumberOfFactions
 	}
 
-	public static int NumberOfFactions;
+	public static int NumberOfFactions = 2;
 }

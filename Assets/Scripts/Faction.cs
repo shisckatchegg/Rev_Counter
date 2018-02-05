@@ -15,23 +15,28 @@ public class Faction
 
 	public int[] FactionRelationShips;
 
+	private FactionDisplay _factionDataDisplay;
 
-	// Use this for initialization
+	
 	public void Initialize ()
 	{
 		ControlledPopulationNodes = new List<GameObject>();
 		ControlledMilitary = new List<GameObject>();
 		ControlledSpies = new List<GameObject>();
 		FactionRelationShips = new int[(int) Globals.FactionNames.NumberOfFactions];
+		_factionDataDisplay = new FactionDisplay();
 		
 		CollectControlledPopulationNodes();
 		CollectControlledUnits();
+
+
+		_factionDataDisplay.InitializeTextDisplay();
+		_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
 	}
 	
-	// Update is called once per frame
 	public void Update ()
 	{
-		
+		_factionDataDisplay.Update();
 	}
 
 	private void CollectControlledPopulationNodes()

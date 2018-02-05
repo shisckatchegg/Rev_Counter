@@ -1,9 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SoldierUnit : UnitBase
 {
+	public SoldierUnit(GameObject location)
+		: base(location)
+	{
+
+	}
 
 	// Use this for initialization
 	void Start () {

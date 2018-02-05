@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PopulationNodeController : MonoBehaviour {
+public class PopulationNodeStatInfoDisplay : MonoBehaviour {
 
 	private PopulationNodeStats _populationNodeStats;
 

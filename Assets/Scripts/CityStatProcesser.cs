@@ -5,7 +5,7 @@ public class CityStatProcesser
 {
 	public GameObject [] PopulationNodes;
 	
-	public void Initialize()
+	public void Initialize() 
 	{
 		PopulationNodes = GameObject.FindGameObjectsWithTag("PopulationNode");
 	}

@@ -1,5 +1,5 @@
 ﻿
-namespace Globals
+public static class Globals
 {
 	public enum FactionNames
 	{
@@ -15,4 +15,6 @@ namespace Globals
 
 		NumberOfFactions
 	}
+
+	public static int NumberOfFactions;
 }

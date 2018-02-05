@@ -17,7 +17,7 @@ public class Faction
 
 
 	// Use this for initialization
-	void Start ()
+	public void Initialize ()
 	{
 		ControlledPopulationNodes = new List<GameObject>();
 		ControlledMilitary = new List<GameObject>();
@@ -29,7 +29,7 @@ public class Faction
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	public void Update ()
 	{
 		
 	}

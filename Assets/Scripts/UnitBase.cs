@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class UnitBase : MonoBehaviour {
     public int Faction;     //en PopulationNodeStats.cs se llama Control?
-    public string Location; //en PopulationNodeStats.cs se llama PopulationNodeName?
+
+    public GameObject Location;
+
+    public UnitBase(GameObject location){
+        Location = location;
+    }
 
     // Use this for initialization
     void Start () {

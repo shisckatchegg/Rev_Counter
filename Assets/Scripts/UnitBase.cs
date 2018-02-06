@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class UnitBase : MonoBehaviour {
-    public int Faction;     //en PopulationNodeStats.cs se llama Control?
+public class UnitBase : MonoBehaviour
+{
+	public Globals.FactionNames Faction;
 
     public GameObject Location;
-    /*
-    public UnitBase(GameObject location){
+
+    public UnitBase(GameObject location)
+	{
         Location = location;
-    }*/
+    }
 
     // Use this for initialization
     void Start () {

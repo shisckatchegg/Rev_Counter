@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class PopulationNodeSelection : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PopulationNodeSelection : MonoBehaviour
 		_selectionDisplay = new SelectionDisplay();
 
 		_selectionDisplay.Initialization();
-		_selectionDisplay.FirstUpdate();
+		//_selectionDisplay.FirstUpdate();
 	}
 	
 	// Update is called once per frame
@@ -19,7 +20,13 @@ public class PopulationNodeSelection : MonoBehaviour
 		_selectionDisplay.Update();
 	}
 
+    void OnMouseDown()
+    {
+        _populationNodeStats = GetComponent<PopulationNodeStats>();
+        _selectionDisplay.FirstUpdate(_populationNodeStats);
+        //Debug.Log(_populationNodeStats.Stats.FactionsSupport[0]);
+    }
 
-	//OnMouseDown goes here. This method would be caled when clicking on the population node
-	//This method will then edit the text display of the bar
+    //OnMouseDown goes here. This method would be called when clicking on the population node
+    //This method will then edit the text display of the bar
 }

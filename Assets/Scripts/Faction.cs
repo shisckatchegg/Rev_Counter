@@ -17,13 +17,17 @@ public class Faction
 
 	private FactionDisplay _factionDataDisplay;
 
-	
+	public Faction(Globals.FactionNames factionId)
+	{
+		FactionId = factionId;
+	}
+
 	public void Initialize ()
 	{
 		ControlledPopulationNodes = new List<GameObject>();
 		ControlledMilitary = new List<GameObject>();
 		ControlledSpies = new List<GameObject>();
-		FactionRelationShips = new int[(int) Globals.FactionNames.NumberOfFactions];
+		FactionRelationShips = new int[Globals.NumberOfFactions];
 		_factionDataDisplay = new FactionDisplay();
 		
 		CollectControlledPopulationNodes();
@@ -36,6 +40,8 @@ public class Faction
 	
 	public void Update ()
 	{
+		//Unit orders will go here
+
 		_factionDataDisplay.Update();
 	}
 

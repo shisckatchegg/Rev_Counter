@@ -2,19 +2,26 @@
 
 public class SoldierUnit : UnitBase
 {
-	public SoldierUnit(GameObject location)
-		: base(location)
+	public SoldierUnit(PopulationNode location, Globals.FactionNames factionId)
+		: base(location, factionId)
 	{
 
 	}
 
 	// Use this for initialization
-	void Start () {
-		
+	protected override void Start ()
+	{
+		base.Start();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	protected override void Update ()
+	{
+		base.Update();
+	}
+
+	public override void Movement(PopulationNode destination)
+	{
+
 	}
 }

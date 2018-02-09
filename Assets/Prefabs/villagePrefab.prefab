@@ -37,10 +37,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4570854807528290}
   - component: {fileID: 212070801914033872}
-  - component: {fileID: 114888476260425328}
   - component: {fileID: 114678081456031628}
   - component: {fileID: 114618412780344346}
   - component: {fileID: 61899948893765890}
+  - component: {fileID: 114476178106262824}
   m_Layer: 0
   m_Name: villagePrefab
   m_TagString: PopulationNode
@@ -183,6 +183,26 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &114476178106262824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1760528544566822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3ce71a971f0c74289c1174a59e1a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats:
+    PopulationNodeName: Kakariko
+    Control: 1
+    _factionsSupport:
+    - 0.8
+    - 0.2
+    Population: 2995
+    RecruitmentSlots: 1
+    Type: 0
 --- !u!114 &114618412780344346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,26 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4454871c3119341a47d56c46b28f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114888476260425328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1760528544566822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3286ea280c7d1f845b4c076ae17137e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stats:
-    PopulationNodeName: Tale
-    Control: 1
-    _factionsSupport:
-    - 0.8
-    - 0.2
-    Population: 2314
-    RecruitmentSlots: 1
-    Type: 0
 --- !u!212 &212070801914033872
 SpriteRenderer:
   m_ObjectHideFlags: 1

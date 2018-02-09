@@ -51,7 +51,7 @@ public class Faction
 		
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodes.Length; populationNodeIndex++)
 		{
-			PopulationNodeStats populationNodeStats = populationNodes[populationNodeIndex].GetComponent<PopulationNodeStats>();
+			PopulationNode populationNodeStats = populationNodes[populationNodeIndex].GetComponent<PopulationNode>();
 			if (populationNodeStats.Stats.Control == (int)FactionId)
 			{
 				ControlledPopulationNodes.Add(populationNodes[populationNodeIndex]);

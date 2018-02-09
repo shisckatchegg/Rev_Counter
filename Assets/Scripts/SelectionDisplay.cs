@@ -14,10 +14,10 @@ public class SelectionDisplay
 	public void FirstUpdate(PopulationNodeStats selection)
 	{
         _selectionText.text =
-            selection.Stats.PopulationNodeName
-            + "\nPopulation: " + selection.Stats.Population
-            + "\nControl: " + selection.Stats.Control
-            + "\nSupport: " + selection.Stats.FactionsSupport[0];// + " " + selection.Stats.FactionsSupport[1];
+            selection.PopulationNodeName
+            + "\nPopulation: " + selection.Population
+            + "\nControl: " + selection.Control
+            + "\nSupport: " + selection.FactionsSupport[0];// + " " + selection.Stats.FactionsSupport[1];
     }
 
     public void Update()

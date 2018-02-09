@@ -11,7 +11,6 @@ public class PopulationNodeSelection : MonoBehaviour
 		_selectionDisplay = new SelectionDisplay();
 
 		_selectionDisplay.Initialization();
-		//_selectionDisplay.FirstUpdate();
 	}
 	
 	// Update is called once per frame
@@ -22,11 +21,7 @@ public class PopulationNodeSelection : MonoBehaviour
 
     void OnMouseDown()
     {
-        _populationNodeStats = GetComponent<PopulationNodeStats>();
+        _populationNodeStats = GetComponent<PopulationNode>().Stats;
         _selectionDisplay.FirstUpdate(_populationNodeStats);
-        //Debug.Log(_populationNodeStats.Stats.FactionsSupport[0]);
     }
-
-    //OnMouseDown goes here. This method would be called when clicking on the population node
-    //This method will then edit the text display of the bar
 }

@@ -2,13 +2,13 @@
 
 public class PopulationNodeStatInfoDisplay : MonoBehaviour {
 
-	private PopulationNodeStats _populationNodeStats;
+	private PopulationNode _populationNode;
 
 	private TextMesh _populationNodeStatDisplay;
 
 	// Use this for initialization
 	void Start () {
-		_populationNodeStats = GetComponent<PopulationNodeStats>();
+		_populationNode = GetComponent<PopulationNode>();
 		_populationNodeStatDisplay = GetComponentInChildren<TextMesh>();
 	}
 	
@@ -16,9 +16,9 @@ public class PopulationNodeStatInfoDisplay : MonoBehaviour {
 	void Update ()
 	{
 		_populationNodeStatDisplay.text = 
-			_populationNodeStats.Stats.PopulationNodeName 
-			+ "\nPopulation: " + _populationNodeStats.Stats.Population
-			+ "\nControl: " + _populationNodeStats.Stats.Control
-			+ "\nSupport: " + _populationNodeStats.Stats.FactionsSupport[0] + " " + _populationNodeStats.Stats.FactionsSupport[1];
+			_populationNode.Stats.PopulationNodeName 
+			+ "\nPopulation: " + _populationNode.Stats.Population
+			+ "\nControl: " + _populationNode.Stats.Control
+			+ "\nSupport: " + _populationNode.Stats.FactionsSupport[0] + " " + _populationNode.Stats.FactionsSupport[1];
 	}
 }

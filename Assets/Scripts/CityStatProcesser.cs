@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class CityStatProcesser
 {
@@ -14,7 +13,7 @@ public class CityStatProcesser
 	{
 		foreach (var populatioNode in PopulationNodes)
 		{
-			populatioNode.GetComponent<PopulationNodeStats>().ProcessStats();
+			populatioNode.GetComponent<PopulationNode>().ProcessStats();
 		}
 	}
 }

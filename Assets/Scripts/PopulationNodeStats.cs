@@ -12,7 +12,7 @@ public enum CityType
 
 
 [System.Serializable]
-public class PopulationStats
+public class PopulationNodeStats
 {
 	public string PopulationNodeName;
 
@@ -36,7 +36,7 @@ public class PopulationStats
 	private const float SUPPORT_DECAY_THRESHOLD = 0.6f;
 	private const float SUPPORT_DECAY_AMOUNT = 0.05f;
 
-	public PopulationStats(string name, int control, List<float> factionsSupport, int population, CityType type)
+	public PopulationNodeStats(string name, int control, List<float> factionsSupport, int population, CityType type)
 	{
 		PopulationNodeName = name;
 		Control = control;
@@ -111,33 +111,5 @@ public class PopulationStats
 				unassignedSupport = 0;
 			}
 		}
-	}
-	
-}
-
-
-public class PopulationNodeStats : MonoBehaviour {
-
-	public PopulationStats Stats;
-
-	// Use this for initialization
-	void Start () {
-		//Stats = new PopulationStats("City A", 1, new List<float>() { 1, 0 }, 9000, CityType.City);
-	}
-	
-
-	public void ProcessStats()
-	{
-		Stats.Update();
-
-		Debug.Log("City: " + Stats.PopulationNodeName + " current population: " + Stats.Population);
-		Debug.Log("City: " + Stats.PopulationNodeName + " support for faction 1: " + Stats.FactionsSupport[0]);
-		Debug.Log("City: " + Stats.PopulationNodeName + " support for faction 2: " + Stats.FactionsSupport[1]);
-
-	}
-
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

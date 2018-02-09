@@ -1,22 +1,28 @@
 ﻿using UnityEngine;
 
-public class UnitBase : MonoBehaviour
+public abstract class UnitBase : MonoBehaviour
 {
 	public Globals.FactionNames Faction;
 
-    public GameObject Location;
+    public PopulationNode Location;
 
-    public UnitBase(GameObject location)
+    public UnitBase(PopulationNode location, Globals.FactionNames factionNames)
 	{
         Location = location;
+		Faction = factionNames;
     }
 
     // Use this for initialization
-    void Start () {
+    protected virtual void Start ()
+	{
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update ()
+	{
 	}
+
+	public abstract void Movement(PopulationNode destination);
+
 }

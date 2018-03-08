@@ -7,11 +7,17 @@ public class GameControl : MonoBehaviour
 
 	public int TurnNumber;
 
-	private void Start()
+    public PopulationNodeSelection selection;
+    public Globals.FactionNames FactionId;
+
+    private void Start()
 	{
 		_turnControl = new TurnControl();
 		_turnControl.InitializeProcessers();
-	}
+        //selection = GameObject.Find("SelectedPopulationNode");
+
+        //GetComponent<PopulationNodeSelection>();
+    }
 
 	public void ProcessGame()
 	{
@@ -19,7 +25,14 @@ public class GameControl : MonoBehaviour
 		TurnNumber++;
 	}
 
+    public void RecruitSpy()
+    {
+        Debug.Log("spy recruitment");
 
+        selection._populationNode.PresentUnits.Add(new SpyUnit(selection._populationNode, FactionId));
+
+        Debug.Log(selection._populationNode.PresentUnits.Count);
+    }
 }
 
 internal class TurnControl

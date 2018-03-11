@@ -17,6 +17,7 @@
 	{
 		for (int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
 		{
+			_gameFactions[factionIndex].ExecuteUnitMovementOrders();
 			_gameFactions[factionIndex].Update();
 		}
 	}

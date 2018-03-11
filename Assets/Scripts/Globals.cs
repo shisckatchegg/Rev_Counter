@@ -17,4 +17,5 @@ public static class Globals
 	}
 
 	public static int NumberOfFactions = 2;
+
 }

@@ -38,10 +38,25 @@ public class Faction
 		_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
 	}
 	
+	public void ExecuteUnitMovementOrders()
+	{
+		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
+		{
+			SpyUnit spy = ControlledSpies[spyUnitIndex].GetComponent<SpyUnit>();
+			spy.ExecuteMovement();
+		}
+
+		for (int soldierUnitIndex = 0; soldierUnitIndex < ControlledMilitary.Count; soldierUnitIndex++)
+		{
+			SoldierUnit soldier = ControlledMilitary[soldierUnitIndex].GetComponent<SoldierUnit>();
+			soldier.ExecuteMovement();
+		}
+	}
+
 	public void Update ()
 	{
 		//Unit orders will go here
-
+		
 		_factionDataDisplay.Update();
 	}
 
@@ -70,12 +85,30 @@ public class Faction
 
 	private void CollectControlledSpies()
 	{
+		GameObject[] spyGameObjects = GameObject.FindGameObjectsWithTag("SpyUnit");
 
+		for (int spyGameObjectIndex = 0; spyGameObjectIndex < spyGameObjects.Length; spyGameObjectIndex++)
+		{
+			SpyUnit spyUnit = spyGameObjects[spyGameObjectIndex].GetComponent<SpyUnit>();
+			if (spyUnit.Faction == FactionId)
+			{
+				ControlledSpies.Add(spyGameObjects[spyGameObjectIndex]);
+			}
+		}
 	}
 
 	private void CollectControlledMilitary()
 	{
+		GameObject[] soldierGameObjects = GameObject.FindGameObjectsWithTag("SoldierUnit");
 
+		for (int soldierGameObjectIndex = 0; soldierGameObjectIndex < soldierGameObjects.Length; soldierGameObjectIndex++)
+		{
+			SoldierUnit soldierUnit = soldierGameObjects[soldierGameObjectIndex].GetComponent<SoldierUnit>();
+			if (soldierUnit.Faction == FactionId)
+			{
+				ControlledMilitary.Add(soldierGameObjects[soldierGameObjectIndex]);
+			}
+		}
 	}
 
 	private void CollectControlledLeader()

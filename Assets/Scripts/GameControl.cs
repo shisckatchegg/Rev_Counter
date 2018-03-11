@@ -7,6 +7,8 @@ public class GameControl : MonoBehaviour
 
 	public int TurnNumber;
 
+	public PopulationNode CurrentlySelectedPopulationNode;
+
 	private void Start()
 	{
 		_turnControl = new TurnControl();

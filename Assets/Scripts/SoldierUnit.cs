@@ -20,8 +20,17 @@ public class SoldierUnit : UnitBase
 		base.Update();
 	}
 
-	public override void Movement(PopulationNode destination)
+	public override void InitiateMovement(PopulationNode destination)
 	{
+		Destination = destination;
+	}
 
+	public override void ExecuteMovement()
+	{
+		if(Destination != null)
+		{
+			CurrentLocation = Destination;
+			Destination = null;
+		}
 	}
 }

@@ -20,19 +20,35 @@ public class SpyUnit : UnitBase
 		base.Update();
     }
 
-	public override void Movement(PopulationNode destination)
+	public override void InitiateMovement(PopulationNode destination)
 	{
-		Location = destination;
+		Destination = destination;
+	}
+
+	public override void ExecuteMovement()
+	{
+		if (Destination != null)
+		{
+			for (int spyIndex = 0; spyIndex < CurrentLocation.PresentSpies.Count; spyIndex++)
+			{
+				if(CurrentLocation.PresentSpies[spyIndex] == this)
+				{
+					CurrentLocation.PresentSpies.Remove(this);
+				}
+			}
+
+			Destination.PresentSpies.Add(this);
+
+			CurrentLocation = Destination;
+			Destination = null;
+		}
 	}
 
 	public void Assassinate(GameObject target)
 	{
-		for(int unitIndex = 0; unitIndex < Location.PresentUnits.Count; unitIndex++)
+		for(int unitIndex = 0; unitIndex < CurrentLocation.PresentSpies.Count; unitIndex++)
 		{
-			if(!(Location.PresentUnits[unitIndex] is SoldierUnit))
-			{
-				//Random chance of killing the unit!
-			}
+			//Random chance of killing the unit!
 		}
 	}
 

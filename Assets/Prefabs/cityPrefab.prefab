@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 4596576465315432}
   - component: {fileID: 212525243295228942}
   - component: {fileID: 114147229778752520}
-  - component: {fileID: 114680246542986178}
   - component: {fileID: 61124355029100652}
   - component: {fileID: 114547673648804584}
   m_Layer: 0
@@ -214,17 +213,9 @@ MonoBehaviour:
     Population: 9437
     RecruitmentSlots: 2
     Type: 1
---- !u!114 &114680246542986178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1333096073479024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87845285f2390434a9ca28928c8f93b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  PresentSoldiers: []
+  PresentSpies: []
+  _populationNodeSelection: {fileID: 0}
 --- !u!212 &212525243295228942
 SpriteRenderer:
   m_ObjectHideFlags: 1

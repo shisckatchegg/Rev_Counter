@@ -4,11 +4,13 @@ public abstract class UnitBase : MonoBehaviour
 {
 	public Globals.FactionNames Faction;
 
-    public PopulationNode Location;
+    public PopulationNode CurrentLocation;
+
+	public PopulationNode Destination;
 
     public UnitBase(PopulationNode location, Globals.FactionNames factionNames)
 	{
-        Location = location;
+        CurrentLocation = location;
 		Faction = factionNames;
     }
 
@@ -23,6 +25,8 @@ public abstract class UnitBase : MonoBehaviour
 	{
 	}
 
-	public abstract void Movement(PopulationNode destination);
+	public abstract void InitiateMovement(PopulationNode destination);
+
+	public abstract void ExecuteMovement();
 
 }

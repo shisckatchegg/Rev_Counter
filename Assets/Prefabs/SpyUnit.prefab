@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114158610935911748}
   m_Layer: 0
   m_Name: SpyUnit
-  m_TagString: Untagged
+  m_TagString: SpyUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

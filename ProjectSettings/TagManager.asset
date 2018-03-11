@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PopulationNode
+  - SoldierUnit
+  - SpyUnit
   layers:
   - Default
   - TransparentFX

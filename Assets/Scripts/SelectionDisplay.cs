@@ -16,7 +16,7 @@ public class SelectionDisplay
 
 	public void PreInitialization()
 	{
-		_selectionText = GameObject.Find("SelectedPopulationNode").GetComponent<Text>();
+		_selectionText = GameObject.Find("SelectedPopulationNodeText").GetComponent<Text>();
 		_spySelectionGameObject = GameObject.Find("SpyCounter");
 		_maximumSpyText = GameObject.Find("AmountOfSpiesPresent").GetComponent<Text>();
 		_spySelection = _spySelectionGameObject.GetComponentInChildren<InputField>();
@@ -27,6 +27,7 @@ public class SelectionDisplay
 	public void Initialization()
 	{
 		_spySelectionGameObject.SetActive(false);
+		_selectionText.text = "";
 	}
 	
 	public void FirstUpdate( string populationNodeName, List<SoldierUnit> soldiersInNode, List<SpyUnit> spiesInNode)

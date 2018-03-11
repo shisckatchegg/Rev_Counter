@@ -20,7 +20,7 @@ public class Deselect : MonoBehaviour
 
     public void OnMouseDown()
     {        
-        _selectionText = GameObject.Find("SelectedPopulationNode").GetComponent<Text>();
+        _selectionText = GameObject.Find("SelectedPopulationNodeText").GetComponent<Text>();
 
         if (_selectionText.text != "")
         {

@@ -12,7 +12,7 @@ public class PopulationNode : MonoBehaviour
 
 	private void Awake()
 	{
-		_populationNodeSelection = GameObject.Find("SelectedPopulationNode").GetComponent<PopulationNodeSelection>();
+		_populationNodeSelection = GameObject.Find("SelectedPopulationNodeText").GetComponent<PopulationNodeSelection>();
 	}
 
 	// Use this for initialization

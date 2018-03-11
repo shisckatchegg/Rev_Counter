@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PopulationNodeSelection : MonoBehaviour
 {
-	private PopulationNode _populationNode;   //This needs to be assigned when cliking on the population node 
+	public PopulationNode SelectedPopulationNode;       //This needs to be assigned when cliking on the population node 
+
 	private SelectionDisplay _selectionDisplay;         //This will edit the text in the scene
 
 	private void Awake()
@@ -26,8 +27,8 @@ public class PopulationNodeSelection : MonoBehaviour
 
 	public void InitializeSelection(PopulationNode populationNode)
 	{
-		_populationNode = populationNode;
-		_selectionDisplay.FirstUpdate(_populationNode.Stats.PopulationNodeName, _populationNode.PresentSoldiers, _populationNode.PresentSpies);
+		SelectedPopulationNode = populationNode;
+		_selectionDisplay.FirstUpdate(SelectedPopulationNode.Stats.PopulationNodeName, SelectedPopulationNode.PresentSoldiers, SelectedPopulationNode.PresentSpies);
 	}
 
 	public void InitiateMovement(PopulationNode destination)
@@ -36,7 +37,7 @@ public class PopulationNodeSelection : MonoBehaviour
 		int spyIndex = 0;
 		while(spyIndex < _selectionDisplay.SelectedSpies)
 		{
-			_populationNode.PresentSpies[spyIndex].InitiateMovement(destination);
+			SelectedPopulationNode.PresentSpies[spyIndex].InitiateMovement(destination);
 			spyIndex++;
 		}
 

@@ -17,7 +17,7 @@ public class Faction
 
 	private FactionDisplay _factionDataDisplay;
 
-    public PopulationNodeSelection selection;
+    public PopulationNodeSelection Selection;
     
     public Faction(Globals.FactionNames factionId)
 	{
@@ -122,6 +122,6 @@ public class Faction
     {
         Debug.Log("spy recruitment");
         
-        selection._populationNode.PresentUnits.Add(new SpyUnit(selection._populationNode, FactionId));
+        Selection.SelectedPopulationNode.PresentSpies.Add(new SpyUnit(Selection.SelectedPopulationNode, FactionId));
     }
 }

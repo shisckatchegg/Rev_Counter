@@ -112,4 +112,14 @@ public class PopulationNodeStats
 			}
 		}
 	}
+
+	public float GetFactionSupport(Globals.FactionNames faction)
+	{
+		return _factionsSupport[(int)faction];
+	}
+
+	public void SetFactionSupport(Globals.FactionNames faction, float newSupport)
+	{
+		_factionsSupport[(int)faction] = newSupport;
+	}
 }

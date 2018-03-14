@@ -2,6 +2,9 @@
 
 public class SpyUnit : UnitBase
 {
+	public int AssasinationChance = 60;     //Chance of performing successful assasination
+	public float PropagandaEffectiveness = 0.03f;
+
 	public SpyUnit(PopulationNode location, Globals.FactionNames factionId)
 		: base(location, factionId)
 	{
@@ -46,9 +49,11 @@ public class SpyUnit : UnitBase
 
 	public void Assassinate(GameObject target)
 	{
-		for(int unitIndex = 0; unitIndex < CurrentLocation.PresentSpies.Count; unitIndex++)
+		int randomAssassinationTarget = Random.Range(0, CurrentLocation.PresentSpies.Count - 1);
+
+		if (Random.Range(0, 100) < AssasinationChance)
 		{
-			//Random chance of killing the unit!
+			CurrentLocation.PresentSpies.RemoveAt(randomAssassinationTarget);
 		}
 	}
 
@@ -64,7 +69,8 @@ public class SpyUnit : UnitBase
 
 	public void PropagandaCampaign()
 	{
-
+		float currentSupport = CurrentLocation.Stats.GetFactionSupport(Faction);
+		CurrentLocation.Stats.SetFactionSupport(Faction, currentSupport + PropagandaEffectiveness);
 	}
 
 	public void BuildSpyNetwork()

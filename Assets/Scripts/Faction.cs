@@ -45,13 +45,28 @@ public class Faction
 		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
 		{
 			SpyUnit spy = ControlledSpies[spyUnitIndex].GetComponent<SpyUnit>();
-			spy.ExecuteMovement();
+			if (spy.OrderedToMove)
+			{
+				spy.ExecuteMovement();
+			}
 		}
 
 		for (int soldierUnitIndex = 0; soldierUnitIndex < ControlledMilitary.Count; soldierUnitIndex++)
 		{
 			SoldierUnit soldier = ControlledMilitary[soldierUnitIndex].GetComponent<SoldierUnit>();
 			soldier.ExecuteMovement();
+		}
+	}
+
+	public void ExecuteUnitAssassinationOrders()
+	{
+		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
+		{
+			SpyUnit spy = ControlledSpies[spyUnitIndex].GetComponent<SpyUnit>();
+			if (spy.OrderedToAssassinate)
+			{
+				spy.ExecuteAssassination();
+			}
 		}
 	}
 

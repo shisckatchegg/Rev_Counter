@@ -7,15 +7,21 @@ public class SelectionDisplay
 	private Text _selectionText;
 
 	private GameObject _spySelectionGameObject;
+	private GameObject _assassinateButtonGameObject;
 
 	private Text _maximumSpyText;
 
 	private InputField _spySelection;
 
+	private Button _assassinateButton;
+
 	public int SelectedSpies;
 
 	public void PreInitialization()
 	{
+		_assassinateButtonGameObject = GameObject.Find("AssassinateButton");
+		_assassinateButton = _assassinateButtonGameObject.GetComponent<Button>();
+
 		_selectionText = GameObject.Find("SelectedPopulationNodeText").GetComponent<Text>();
 		_spySelectionGameObject = GameObject.Find("SpyCounter");
 		_maximumSpyText = GameObject.Find("AmountOfSpiesPresent").GetComponent<Text>();
@@ -27,6 +33,7 @@ public class SelectionDisplay
 	public void Initialization()
 	{
 		_spySelectionGameObject.SetActive(false);
+		_assassinateButtonGameObject.SetActive(false);
 		_selectionText.text = "";
 	}
 	
@@ -42,7 +49,11 @@ public class SelectionDisplay
 		_maximumSpyText.text = numberOfSpies.ToString();
 				
 		_spySelectionGameObject.SetActive(true);
+		
 		_spySelection.text = 0.ToString();
+
+		_assassinateButtonGameObject.SetActive(true);
+		_assassinateButton.interactable = false;
 	}
 
 	public void SubmitSelection()
@@ -73,6 +84,7 @@ public class SelectionDisplay
 	{
 		if(Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
 		{
+			_assassinateButton.interactable = true;
 			return;
 		}	
 	}

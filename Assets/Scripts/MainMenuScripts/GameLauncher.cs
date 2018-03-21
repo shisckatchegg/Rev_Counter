@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameLauncher : MonoBehaviour {
 
-	public Globals.FactionNames PlayerFaction; 
+	public Globals.FactionNames ButtonFactionId; 
 	// Use this for initialization
 	void Start () {
 		
@@ -16,6 +16,7 @@ public class GameLauncher : MonoBehaviour {
 
 	public void LaunchGame()
 	{
+		Globals.PlayerFaction = ButtonFactionId;
 		SceneManager.LoadScene("Scenes/main");
 	}
 }

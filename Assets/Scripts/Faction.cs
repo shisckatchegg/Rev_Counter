@@ -35,9 +35,11 @@ public class Faction
 		CollectControlledPopulationNodes();
 		CollectControlledUnits();
 
-
-		_factionDataDisplay.InitializeTextDisplay();
-		_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+		if (Globals.PlayerFaction == FactionId)
+		{
+			_factionDataDisplay.InitializeTextDisplay();
+			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+		}
 	}
 	
 	public void ExecuteUnitMovementOrders()
@@ -73,8 +75,10 @@ public class Faction
 	public void Update ()
 	{
 		//Unit orders will go here
-		
-		_factionDataDisplay.Update();
+		if (Globals.PlayerFaction == FactionId)
+		{
+			_factionDataDisplay.Update();
+		}
 	}
 
 	private void CollectControlledPopulationNodes()

@@ -37,7 +37,26 @@ public class PopulationNodeSelection : MonoBehaviour
 		int spyIndex = 0;
 		while(spyIndex < _selectionDisplay.SelectedSpies)
 		{
-			SelectedPopulationNode.PresentSpies[spyIndex].InitiateMovement(destination);
+			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
+			{
+				SelectedPopulationNode.PresentSpies[spyIndex].InitiateMovement(destination);
+			}
+			spyIndex++;
+		}
+
+		_selectionDisplay.SelectedSpies = 0;
+	}
+
+	public void InitiateAssassination()
+	{
+		_selectionDisplay.SubmitSelection();
+		int spyIndex = 0;
+		while (spyIndex < _selectionDisplay.SelectedSpies)
+		{
+			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
+			{
+				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToAssassinate = true; ;
+			}
 			spyIndex++;
 		}
 

@@ -68,9 +68,11 @@ public class Faction
 		CollectControlledPopulationNodes();
 		CollectControlledUnits();
 
-
-		_factionDataDisplay.InitializeTextDisplay();
-		_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+		if (Globals.PlayerFaction == FactionId)
+		{
+			_factionDataDisplay.InitializeTextDisplay();
+			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+		}
 	}
 	
 	public void ExecuteUnitMovementOrders()
@@ -78,7 +80,10 @@ public class Faction
 		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
 		{
 			SpyUnit spy = ControlledSpies[spyUnitIndex].GetComponent<SpyUnit>();
-			spy.ExecuteMovement();
+			if (spy.OrderedToMove)
+			{
+				spy.ExecuteMovement();
+			}
 		}
 
 		for (int soldierUnitIndex = 0; soldierUnitIndex < ControlledMilitary.Count; soldierUnitIndex++)
@@ -88,11 +93,25 @@ public class Faction
 		}
 	}
 
+	public void ExecuteUnitAssassinationOrders()
+	{
+		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
+		{
+			SpyUnit spy = ControlledSpies[spyUnitIndex].GetComponent<SpyUnit>();
+			if (spy.OrderedToAssassinate)
+			{
+				spy.ExecuteAssassination();
+			}
+		}
+	}
+
 	public void Update ()
 	{
 		//Unit orders will go here
-		
-		_factionDataDisplay.Update();
+		if (Globals.PlayerFaction == FactionId)
+		{
+			_factionDataDisplay.Update();
+		}
 	}
 
 	private void CollectControlledPopulationNodes()

@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class SpyUnit : UnitBase
 {
+	[HideInInspector]
+	public int AssasinationBaseChance = 60;     //Chance of performing successful assasination
+	[HideInInspector]
+	public float PropagandaBaseEffectiveness = 0.03f;
+
+	public bool OrderedToAssassinate;
+	public bool OrderedToMove;
+
 	public SpyUnit(PopulationNode location, Globals.FactionNames factionId)
 		: base(location, factionId)
 	{
@@ -22,6 +31,7 @@ public class SpyUnit : UnitBase
 
 	public override void InitiateMovement(PopulationNode destination)
 	{
+		OrderedToMove = true;
 		Destination = destination;
 	}
 
@@ -41,15 +51,32 @@ public class SpyUnit : UnitBase
 
 			CurrentLocation = Destination;
 			Destination = null;
+
+			OrderedToMove = false;
 		}
 	}
 
-	public void Assassinate(GameObject target)
+	public void ExecuteAssassination()
 	{
-		for(int unitIndex = 0; unitIndex < CurrentLocation.PresentSpies.Count; unitIndex++)
+		List<SpyUnit> opposingSpies = new List<SpyUnit>();
+
+		for(int spyIndex = 0; spyIndex < CurrentLocation.PresentSpies.Count; spyIndex++)
 		{
-			//Random chance of killing the unit!
+			if (CurrentLocation.PresentSpies[spyIndex].Faction != Faction)
+			{
+				opposingSpies.Add(CurrentLocation.PresentSpies[spyIndex]);
+			}	
 		}
+		
+		int randomAssassinationTarget = Random.Range(0, opposingSpies.Count - 1);
+
+		if (Random.Range(0, 100) < AssasinationBaseChance)
+		{
+			CurrentLocation.PresentSpies.Remove(opposingSpies[randomAssassinationTarget]);
+			Destroy(opposingSpies[randomAssassinationTarget]);
+		}
+
+		OrderedToAssassinate = false;
 	}
 
 	public void CounterEspionage()
@@ -64,11 +91,17 @@ public class SpyUnit : UnitBase
 
 	public void PropagandaCampaign()
 	{
-
+		float currentSupport = CurrentLocation.Stats.GetFactionSupport(Faction);
+		CurrentLocation.Stats.SetFactionSupport(Faction, currentSupport + PropagandaBaseEffectiveness);
 	}
 
 	public void BuildSpyNetwork()
 	{
 
+	}
+
+	public bool IsSpyBusy()
+	{
+		return OrderedToAssassinate || OrderedToAssassinate;
 	}
 }

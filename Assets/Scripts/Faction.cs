@@ -22,10 +22,10 @@ public class Faction
     public PopulationNodeSelection Selection;
 
     private UnityAction someListener;
-
+    /*
     void Awake()
     {
-        someListener = new UnityAction(SomeFunction);
+        someListener = new UnityAction(RecruitSpy);
     }
 
     void SubscribeRecruitmentEvent()
@@ -37,18 +37,13 @@ public class Faction
     {
         EventManager.StopListening("test", someListener);
     }
-
-    void SomeFunction()
-    {
-        Debug.Log("Some Function was called!");
-    }
-
+    /*
     public void RecruitSpy()
     {
         Debug.Log("spy recruitment");
 
         //Selection.SelectedPopulationNode.PresentSpies.Add(new SpyUnit(Selection.SelectedPopulationNode, FactionId));
-    }
+    }*/
 
 
 
@@ -136,19 +131,19 @@ public class Faction
 
 		CollectControlledLeader();
 	}
-
+    
 	private void CollectControlledSpies()
 	{
-		GameObject[] spyGameObjects = GameObject.FindGameObjectsWithTag("SpyUnit");
+		//GameObject[] spyGameObjects = GameObject.FindGameObjectsWithTag("SpyUnit");
 
-		for (int spyGameObjectIndex = 0; spyGameObjectIndex < spyGameObjects.Length; spyGameObjectIndex++)
-		{
-			SpyUnit spyUnit = spyGameObjects[spyGameObjectIndex].GetComponent<SpyUnit>();
-			if (spyUnit.Faction == FactionId)
-			{
-				ControlledSpies.Add(spyGameObjects[spyGameObjectIndex]);
-			}
-		}
+		//for (int spyGameObjectIndex = 0; spyGameObjectIndex < spyGameObjects.Length; spyGameObjectIndex++)
+		//{
+		//	SpyUnit spyUnit = spyGameObjects[spyGameObjectIndex].GetComponent<SpyUnit>();
+		//	if (spyUnit.Faction == FactionId)
+		//	{
+		//		ControlledSpies.Add(spyGameObjects[spyGameObjectIndex]);
+		//	}
+		//}
 	}
 
 	private void CollectControlledMilitary()

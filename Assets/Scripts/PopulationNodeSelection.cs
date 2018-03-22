@@ -62,4 +62,14 @@ public class PopulationNodeSelection : MonoBehaviour
 
 		_selectionDisplay.SelectedSpies = 0;
 	}
+
+    public void RecruitSpy(Globals.FactionNames factionId)
+    {
+        SelectedPopulationNode.PresentSpies.Add(new SpyUnit(SelectedPopulationNode, factionId));
+    }
+
+    public void PlayerSpyRecruitment()
+    {
+        RecruitSpy(Globals.PlayerFaction);
+    }
 }

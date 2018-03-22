@@ -20,14 +20,6 @@ public class GameControl : MonoBehaviour
 		_turnControl.ProcessTurn();
 		TurnNumber++;
 	}
-
-    void Update()
-    {
-        if (Input.GetKeyDown("q"))
-        {
-            EventManager.TriggerEvent("test");
-        }
-    }
 }
 
 internal class TurnControl

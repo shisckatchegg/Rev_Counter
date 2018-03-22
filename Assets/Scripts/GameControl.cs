@@ -21,7 +21,13 @@ public class GameControl : MonoBehaviour
 		TurnNumber++;
 	}
 
-
+    void Update()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            EventManager.TriggerEvent("test");
+        }
+    }
 }
 
 internal class TurnControl

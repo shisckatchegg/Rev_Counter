@@ -12,6 +12,8 @@ public class SelectionDisplay
 
 	private InputField _spySelection;
 
+    private GameObject _recruitSpyButton;
+
 	public int SelectedSpies;
 
 	public void PreInitialization()
@@ -22,12 +24,16 @@ public class SelectionDisplay
 		_spySelection = _spySelectionGameObject.GetComponentInChildren<InputField>();
 		_spySelection.onValidateInput = InputValidation;
 		_spySelection.onEndEdit.AddListener(delegate { CheckSpyUnitSelectionIsValid(_spySelection); } );
-	}
+        _recruitSpyButton = GameObject.Find("Recruitment");
+
+    }
 
 	public void Initialization()
 	{
 		_spySelectionGameObject.SetActive(false);
-		_selectionText.text = "";
+        _recruitSpyButton.SetActive(false);
+
+        _selectionText.text = "";
 	}
 	
 	public void FirstUpdate( string populationNodeName, List<SoldierUnit> soldiersInNode, List<SpyUnit> spiesInNode)
@@ -43,9 +49,12 @@ public class SelectionDisplay
 				
 		_spySelectionGameObject.SetActive(true);
 		_spySelection.text = 0.ToString();
-	}
 
-	public void SubmitSelection()
+        _recruitSpyButton.SetActive(true);
+        //_recriutSpyButton.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public void SubmitSelection()
 	{
 		int numberOfSpiesSelected = int.Parse(_spySelection.text);
 		int maximumNumberOfSpiesPresent = int.Parse(_maximumSpyText.text);

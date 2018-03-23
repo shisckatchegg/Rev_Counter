@@ -18,6 +18,6 @@ public static class Globals
 
 	public static int NumberOfFactions = 2;
 
-	public static FactionNames PlayerFaction;
+	public static FactionNames PlayerFaction = FactionNames.Soviets;
 
 }

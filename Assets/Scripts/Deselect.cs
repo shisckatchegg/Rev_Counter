@@ -13,7 +13,6 @@ public class Deselect : MonoBehaviour
 	private void Awake()
 	{
 		_recruitmentButton = GameObject.Find("Recruitment");
-		_recruitmentButton.SetActive(false);
 
 		_selectionText = GameObject.Find("SelectedPopulationNodeText").GetComponent<Text>();
 
@@ -37,9 +36,6 @@ public class Deselect : MonoBehaviour
 	public void OnMouseDown()
 	{
 		_selectionText.text = "";
-
-		_recruitmentButton.SetActive(false);
-
 		_amountOfSpiesPresent.text = "";
 
 		_spySelectionGameObject.SetActive(false);

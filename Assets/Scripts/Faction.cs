@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections;
 
 public class Faction
 {
@@ -18,7 +20,33 @@ public class Faction
 	private FactionDisplay _factionDataDisplay;
 
     public PopulationNodeSelection Selection;
-    
+
+    private UnityAction someListener;
+    /*
+    void Awake()
+    {
+        someListener = new UnityAction(RecruitSpy);
+    }
+
+    void SubscribeRecruitmentEvent()
+    {
+        EventManager.StartListening("test", someListener);
+    }
+
+    void UnsubscribeRecruitmentEvent()
+    {
+        EventManager.StopListening("test", someListener);
+    }
+    /*
+    public void RecruitSpy()
+    {
+        Debug.Log("spy recruitment");
+
+        //Selection.SelectedPopulationNode.PresentSpies.Add(new SpyUnit(Selection.SelectedPopulationNode, FactionId));
+    }*/
+
+
+
     public Faction(Globals.FactionNames factionId)
 	{
 		FactionId = factionId;
@@ -103,19 +131,19 @@ public class Faction
 
 		CollectControlledLeader();
 	}
-
+    
 	private void CollectControlledSpies()
 	{
-		GameObject[] spyGameObjects = GameObject.FindGameObjectsWithTag("SpyUnit");
+		//GameObject[] spyGameObjects = GameObject.FindGameObjectsWithTag("SpyUnit");
 
-		for (int spyGameObjectIndex = 0; spyGameObjectIndex < spyGameObjects.Length; spyGameObjectIndex++)
-		{
-			SpyUnit spyUnit = spyGameObjects[spyGameObjectIndex].GetComponent<SpyUnit>();
-			if (spyUnit.Faction == FactionId)
-			{
-				ControlledSpies.Add(spyGameObjects[spyGameObjectIndex]);
-			}
-		}
+		//for (int spyGameObjectIndex = 0; spyGameObjectIndex < spyGameObjects.Length; spyGameObjectIndex++)
+		//{
+		//	SpyUnit spyUnit = spyGameObjects[spyGameObjectIndex].GetComponent<SpyUnit>();
+		//	if (spyUnit.Faction == FactionId)
+		//	{
+		//		ControlledSpies.Add(spyGameObjects[spyGameObjectIndex]);
+		//	}
+		//}
 	}
 
 	private void CollectControlledMilitary()
@@ -137,10 +165,5 @@ public class Faction
 
 	}
 
-    public void RecruitSpy()
-    {
-        Debug.Log("spy recruitment");
-        
-        Selection.SelectedPopulationNode.PresentSpies.Add(new SpyUnit(Selection.SelectedPopulationNode, FactionId));
-    }
+
 }

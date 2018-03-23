@@ -17,18 +17,6 @@ public class SpyUnit : UnitBase
 
 	}
 
-	// Use this for initialization
-	protected override void Start ()
-	{
-		base.Start();
-	}
-	
-	// Update is called once per frame
-	protected override void Update ()
-	{
-		base.Update();
-    }
-
 	public override void InitiateMovement(PopulationNode destination)
 	{
 		OrderedToMove = true;
@@ -73,7 +61,7 @@ public class SpyUnit : UnitBase
 		if (Random.Range(0, 100) < AssasinationBaseChance)
 		{
 			CurrentLocation.PresentSpies.Remove(opposingSpies[randomAssassinationTarget]);
-			Destroy(opposingSpies[randomAssassinationTarget]);
+			//Destroy(opposingSpies[randomAssassinationTarget]);
 		}
 
 		OrderedToAssassinate = false;
@@ -102,6 +90,6 @@ public class SpyUnit : UnitBase
 
 	public bool IsSpyBusy()
 	{
-		return OrderedToAssassinate || OrderedToAssassinate;
+        return OrderedToAssassinate || OrderedToMove || CreatedThisTurn;
 	}
 }

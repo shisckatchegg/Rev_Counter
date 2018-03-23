@@ -19,11 +19,13 @@ public class PopulationNode : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		
-	}
+        PresentSoldiers = new List<SoldierUnit>();
+        PresentSpies = new List<SpyUnit>();
+
+    }
 
 
-	public void ProcessStats()
+    public void ProcessStats()
 	{
 		Stats.Update();
 	}

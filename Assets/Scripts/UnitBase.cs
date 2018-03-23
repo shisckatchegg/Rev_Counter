@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public abstract class UnitBase : MonoBehaviour
+public abstract class UnitBase
 {
+    public bool CreatedThisTurn;
+
 	public Globals.FactionNames Faction;
 
     public PopulationNode CurrentLocation;
@@ -12,18 +14,8 @@ public abstract class UnitBase : MonoBehaviour
 	{
         CurrentLocation = location;
 		Faction = factionNames;
+        CreatedThisTurn = true;
     }
-
-    // Use this for initialization
-    protected virtual void Start ()
-	{
-
-	}
-	
-	// Update is called once per frame
-	protected virtual void Update ()
-	{
-	}
 
 	public abstract void InitiateMovement(PopulationNode destination);
 

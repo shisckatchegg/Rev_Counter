@@ -8,6 +8,7 @@ public class PopulationNode : MonoBehaviour
 	public List<SoldierUnit> PresentSoldiers;
 	public List<SpyUnit> PresentSpies;
 
+	//TODO: might be a good idea to have a single population node selection and have it reassign population node data when one is clicked
 	public PopulationNodeSelection _populationNodeSelection;
 
 	private void Awake()

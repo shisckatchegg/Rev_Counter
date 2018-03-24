@@ -59,7 +59,6 @@ public class SelectionDisplay
 		_spySelection.text = 0.ToString();
 
         _recruitSpyButton.SetActive(true);
-        //_recriutSpyButton.transform.localScale = new Vector3(1, 1, 1);
 
 		_assassinateButtonGameObject.SetActive(true);
 		_assassinateButton.interactable = false;

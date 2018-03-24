@@ -25,17 +25,34 @@ public class PopulationNodeSelection : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if (_selectionDisplay != null && SelectedPopulationNode != null)
+		{
+			//TODO: very very inefficient!
+			List<UnitBase> copiedListOfSpies;
+			List<UnitBase> copiedListOfSoldiers;
+			copiedListOfSpies = FilterFactionUnits(SelectedPopulationNode.PresentSpies.ConvertAll(x => (UnitBase)x));
+			copiedListOfSoldiers = FilterFactionUnits(SelectedPopulationNode.PresentSoldiers.ConvertAll(x => (UnitBase)x));
+			_ownFactionPresentSpies = copiedListOfSpies.ConvertAll(x => (SpyUnit)x);
+			_ownFactionPresentSoldiers = copiedListOfSoldiers.ConvertAll(x => (SoldierUnit)x);
+
+			_selectionDisplay.Update(_ownFactionPresentSoldiers.Count, _ownFactionPresentSpies.Count);
+		}
 	}
 
 	public void InitializeSelection(PopulationNode populationNode)
 	{
 		SelectedPopulationNode = populationNode;
 
-		//_ownFactionPresentSpies = FilterFactionUnits(SelectedPopulationNode.PresentSpies);
-		//_ownFactionPresentSoldiers = FilterFactionUnits(SelectedPopulationNode.PresentSoldiers);
+		//TODO: very inefficient!
+		List<UnitBase> copiedListOfSpies;
+		List<UnitBase> copiedListOfSoldiers;
+		copiedListOfSpies = FilterFactionUnits(SelectedPopulationNode.PresentSpies.ConvertAll(x => (UnitBase)x));
+		copiedListOfSoldiers = FilterFactionUnits(SelectedPopulationNode.PresentSoldiers.ConvertAll(x =>(UnitBase)x));
+		_ownFactionPresentSpies = copiedListOfSpies.ConvertAll(x => (SpyUnit)x);
+		_ownFactionPresentSoldiers = copiedListOfSoldiers.ConvertAll(x => (SoldierUnit)x);
 
-		_selectionDisplay.FirstUpdate(SelectedPopulationNode.Stats.PopulationNodeName, SelectedPopulationNode.PresentSoldiers, SelectedPopulationNode.PresentSpies);
+
+		_selectionDisplay.FirstUpdate(SelectedPopulationNode.Stats.PopulationNodeName, _ownFactionPresentSoldiers, _ownFactionPresentSpies);
 	}
 
 	private List<UnitBase> FilterFactionUnits(List<UnitBase> presentUnits)

@@ -92,6 +92,6 @@ public class SpyUnit : UnitBase
 
 	public bool IsSpyBusy()
 	{
-        return OrderedToAssassinate || OrderedToMove || OrderedToSpreadPropaganda || CreatedThisTurn;
+		return OrderedToAssassinate || OrderedToMove || OrderedToSpreadPropaganda || CreatedThisTurn;
 	}
 }

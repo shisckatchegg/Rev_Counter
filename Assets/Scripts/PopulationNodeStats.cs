@@ -115,11 +115,59 @@ public class PopulationNodeStats
 
 	public float GetFactionSupport(Globals.FactionNames faction)
 	{
-		return _factionsSupport[(int)faction];
+		return FactionsSupport[(int)faction];
 	}
 
 	public void SetFactionSupport(Globals.FactionNames faction, float newSupport)
 	{
-		_factionsSupport[(int)faction] = newSupport;
+		float originalSupport = FactionsSupport[(int)faction];
+		FactionsSupport[(int)faction] = newSupport;
+		float supportDifference = newSupport - originalSupport;
+		if(supportDifference > 0)
+		{
+			if(FactionsSupport[(int)faction] > 1.0f)
+			{
+				FactionsSupport[(int)faction] = 1.0f;
+				supportDifference = 1.0f - originalSupport;
+			}
+
+
+			float supportPerFaction = supportDifference / (_factionsSupport.Count - 1);
+
+			float remainingSupport = 0.0f;
+
+			for (int factionSupportIndex = 0; factionSupportIndex < FactionsSupport.Count; factionSupportIndex++)
+			{
+				if (factionSupportIndex != (int)faction)
+				{
+					FactionsSupport[factionSupportIndex] -= supportPerFaction;
+
+					if(FactionsSupport[factionSupportIndex] < 0)
+					{
+						remainingSupport = -FactionsSupport[factionSupportIndex];
+						FactionsSupport[factionSupportIndex] = 0.0f;
+					}
+				}
+			}
+
+			if (remainingSupport > 0.0f)
+			{
+				float biggestSupport = float.MinValue;
+				int biggestSupportIndex = -1;
+				for (int factionIndex = 0; factionIndex < FactionsSupport.Count; factionIndex++)
+				{
+					if (FactionsSupport[factionIndex] < biggestSupport && factionIndex != (int)faction)
+					{
+						biggestSupportIndex = factionIndex;
+					}
+				}
+
+				if (biggestSupportIndex != -1)
+				{
+					FactionsSupport[biggestSupportIndex] -= remainingSupport;
+					remainingSupport = 0;
+				}
+			}
+		}
 	}
 }

@@ -8,12 +8,11 @@ public class PopulationNode : MonoBehaviour
 	public List<SoldierUnit> PresentSoldiers;
 	public List<SpyUnit> PresentSpies;
 
-	//TODO: might be a good idea to have a single population node selection and have it reassign population node data when one is clicked
-	public PopulationNodeSelection _populationNodeSelection;
+	public PopulationNodeSelection PopulationNodeSelection;
 
 	private void Awake()
 	{
-		_populationNodeSelection = GameObject.Find("SelectedPopulationNodeText").GetComponent<PopulationNodeSelection>();
+		PopulationNodeSelection = GameObject.Find("SelectedPopulationNodeText").GetComponent<PopulationNodeSelection>();
 	}
 
 	// Use this for initialization
@@ -38,14 +37,14 @@ public class PopulationNode : MonoBehaviour
 
 	void OnMouseDown()
 	{
-		_populationNodeSelection.InitializeSelection(this);
+		PopulationNodeSelection.InitializeSelection(this);
 	}
 
 	private void OnMouseOver()
 	{
 		if(Input.GetMouseButtonDown(1))
 		{
-			_populationNodeSelection.InitiateMovement(this);
+			PopulationNodeSelection.InitiateMovement(this);
 			Debug.Log("City destination selected to move unit: " + Stats.PopulationNodeName);
 		}
 	}

@@ -102,7 +102,23 @@ public class PopulationNodeSelection : MonoBehaviour
 		_selectionDisplay.SelectedSpies = 0;
 	}
 
-    public void RecruitSpy(Globals.FactionNames factionId)
+	public void InitiatePropagandaCampaign()
+	{
+		_selectionDisplay.SubmitSelection();
+		int spyIndex = 0;
+		while (spyIndex < _selectionDisplay.SelectedSpies)
+		{
+			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
+			{
+				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToSpreadPropaganda = true; ;
+			}
+			spyIndex++;
+		}
+
+		_selectionDisplay.SelectedSpies = 0;
+	}
+
+	public void RecruitSpy(Globals.FactionNames factionId)
     {
         SelectedPopulationNode.PresentSpies.Add(new SpyUnit(SelectedPopulationNode, factionId));
     }

@@ -8,6 +8,7 @@ public class SelectionDisplay
 
 	private GameObject _spySelectionGameObject;
 	private GameObject _assassinateButtonGameObject;
+	private GameObject _propagandaButtonGameObject;
 
 	private Text _maximumSpyText;
 
@@ -16,6 +17,7 @@ public class SelectionDisplay
     private GameObject _recruitSpyButton;
 
 	private Button _assassinateButton;
+	private Button _propagandaButton;
 
 	public int SelectedSpies;
 
@@ -23,6 +25,9 @@ public class SelectionDisplay
 	{
 		_assassinateButtonGameObject = GameObject.Find("AssassinateButton");
 		_assassinateButton = _assassinateButtonGameObject.GetComponent<Button>();
+
+		_propagandaButtonGameObject = GameObject.Find("PropagandaButton");
+		_propagandaButton = _propagandaButtonGameObject.GetComponent<Button>();
 
 		_selectionText = GameObject.Find("SelectedPopulationNodeText").GetComponent<Text>();
 		_spySelectionGameObject = GameObject.Find("SpyCounter");
@@ -38,6 +43,7 @@ public class SelectionDisplay
 	{
 		_spySelectionGameObject.SetActive(false);
 		_assassinateButtonGameObject.SetActive(false);
+		_propagandaButtonGameObject.SetActive(false);
 		_selectionText.text = "";
         _recruitSpyButton.SetActive(false);
 
@@ -59,10 +65,12 @@ public class SelectionDisplay
 		_spySelection.text = 0.ToString();
 
         _recruitSpyButton.SetActive(true);
-        //_recriutSpyButton.transform.localScale = new Vector3(1, 1, 1);
 
 		_assassinateButtonGameObject.SetActive(true);
 		_assassinateButton.interactable = false;
+
+		_propagandaButtonGameObject.SetActive(true);
+		_propagandaButton.interactable = false;
 	}
 
     public void SubmitSelection()
@@ -94,6 +102,7 @@ public class SelectionDisplay
 		if(Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
 		{
 			_assassinateButton.interactable = true;
+			_propagandaButton.interactable = true;
 			return;
 		}	
 	}

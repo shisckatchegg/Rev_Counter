@@ -10,6 +10,7 @@ public class SpyUnit : UnitBase
 
 	public bool OrderedToAssassinate;
 	public bool OrderedToMove;
+	public bool OrderedToSpreadPropaganda;
 
 	public SpyUnit(PopulationNode location, Globals.FactionNames factionId)
 		: base(location, factionId)
@@ -61,7 +62,7 @@ public class SpyUnit : UnitBase
 		if (Random.Range(0, 100) < AssasinationBaseChance)
 		{
 			CurrentLocation.PresentSpies.Remove(opposingSpies[randomAssassinationTarget]);
-			//Destroy(opposingSpies[randomAssassinationTarget]);
+			opposingSpies[randomAssassinationTarget] = null;
 		}
 
 		OrderedToAssassinate = false;
@@ -77,10 +78,11 @@ public class SpyUnit : UnitBase
 
 	}
 
-	public void PropagandaCampaign()
+	public void ExecutePropagandaCampaign()
 	{
 		float currentSupport = CurrentLocation.Stats.GetFactionSupport(Faction);
 		CurrentLocation.Stats.SetFactionSupport(Faction, currentSupport + PropagandaBaseEffectiveness);
+		OrderedToSpreadPropaganda = false;
 	}
 
 	public void BuildSpyNetwork()
@@ -90,6 +92,6 @@ public class SpyUnit : UnitBase
 
 	public bool IsSpyBusy()
 	{
-        return OrderedToAssassinate || OrderedToMove || CreatedThisTurn;
+		return OrderedToAssassinate || OrderedToMove || OrderedToSpreadPropaganda || CreatedThisTurn;
 	}
 }

@@ -22,7 +22,7 @@ public class UnitStatProcesser
         {
             for (int spyUnitIndex = 0; spyUnitIndex < _gameFactions[factionIndex].ControlledSpies.Count; spyUnitIndex++)
             {
-                _gameFactions[factionIndex].ControlledSpies[spyUnitIndex].GetComponent<SpyUnit>().CreatedThisTurn = false;
+                _gameFactions[factionIndex].ControlledSpies[spyUnitIndex].CreatedThisTurn = false;
             }
         }
     }

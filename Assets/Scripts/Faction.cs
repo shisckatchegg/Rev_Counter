@@ -20,9 +20,10 @@ public class Faction
 	private FactionDisplay _factionDataDisplay;
 
     public PopulationNodeSelection Selection;
-
-    private UnityAction someListener;
+    
     /*
+    private UnityAction someListener;
+    
     void Awake()
     {
         someListener = new UnityAction(RecruitSpy);

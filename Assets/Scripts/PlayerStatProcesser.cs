@@ -1,15 +1,22 @@
 ﻿public class PlayerStatProcesser
 {
-	private Faction[] _gameFactions;
+	public Faction[] GameFactions;
+
+	public void PreInitialize()
+	{
+		GameFactions = new Faction[Globals.NumberOfFactions];
+
+		for (int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
+		{
+			GameFactions[factionIndex] = new Faction((Globals.FactionNames)factionIndex);
+		}
+	}
 
 	public void Initialize()
 	{
-		_gameFactions = new Faction[Globals.NumberOfFactions];
-
-		for(int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
+		for (int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
 		{
-			_gameFactions[factionIndex] = new Faction((Globals.FactionNames) factionIndex);
-			_gameFactions[factionIndex].Initialize();
+			GameFactions[factionIndex].Initialize();
 		}
 	}
 
@@ -17,10 +24,10 @@
 	{
 		for (int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
 		{
-			_gameFactions[factionIndex].ExecuteUnitAssassinationOrders();
-			_gameFactions[factionIndex].ExecutePropagandaOrders();
-			_gameFactions[factionIndex].ExecuteUnitMovementOrders();
-			_gameFactions[factionIndex].Update();
+			GameFactions[factionIndex].ExecuteUnitAssassinationOrders();
+			GameFactions[factionIndex].ExecutePropagandaOrders();
+			GameFactions[factionIndex].ExecuteUnitMovementOrders();
+			GameFactions[factionIndex].Update();
 		}
 	}
 }

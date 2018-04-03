@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
 
 public class Faction
 {
@@ -21,33 +19,6 @@ public class Faction
 
     public PopulationNodeSelection Selection;
     
-    /*
-    private UnityAction someListener;
-    
-    void Awake()
-    {
-        someListener = new UnityAction(RecruitSpy);
-    }
-
-    void SubscribeRecruitmentEvent()
-    {
-        EventManager.StartListening("test", someListener);
-    }
-
-    void UnsubscribeRecruitmentEvent()
-    {
-        EventManager.StopListening("test", someListener);
-    }
-    /*
-    public void RecruitSpy()
-    {
-        Debug.Log("spy recruitment");
-
-        //Selection.SelectedPopulationNode.PresentSpies.Add(new SpyUnit(Selection.SelectedPopulationNode, FactionId));
-    }*/
-
-
-
     public Faction(Globals.FactionNames factionId)
 	{
 		FactionId = factionId;
@@ -114,16 +85,22 @@ public class Faction
 		//Unit orders will go here
 		if (Globals.PlayerFaction == FactionId)
 		{
-			_factionDataDisplay.Update();
+			_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
 		}
 
 		CollectControlledUnits();
 	}
 
+	//TODO: this vectors are recalculated every turn, adding after every city control change could be quicker
 	private void CollectControlledPopulationNodes()
 	{
 		GameObject[] populationNodes = GameObject.FindGameObjectsWithTag("PopulationNode");
-		
+
+		if (ControlledSpies != null)
+		{
+			ControlledPopulationNodes.Clear();
+		}
+
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodes.Length; populationNodeIndex++)
 		{
 			PopulationNode populationNodeStats = populationNodes[populationNodeIndex].GetComponent<PopulationNode>();
@@ -134,6 +111,7 @@ public class Faction
 		}
 	}
 
+	//TODO: this vectors are recalculated every turn, adding after every unit creation could be quicker
 	private void CollectControlledUnits()
 	{
 		CollectControlledSpies();
@@ -146,6 +124,11 @@ public class Faction
 	private void CollectControlledSpies()
 	{
 		GameObject[] populationNodeGameobjects = GameObject.FindGameObjectsWithTag("PopulationNode");
+
+		if(ControlledSpies != null)
+		{
+			ControlledSpies.Clear();
+		}
 
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodeGameobjects.Length; populationNodeIndex++)
 		{
@@ -163,6 +146,11 @@ public class Faction
 	private void CollectControlledMilitary()
 	{
 		GameObject[] populationNodeGameobjects = GameObject.FindGameObjectsWithTag("PopulationNode");
+
+		if (ControlledMilitary != null)
+		{
+			ControlledMilitary.Clear();
+		}
 
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodeGameobjects.Length; populationNodeIndex++)
 		{

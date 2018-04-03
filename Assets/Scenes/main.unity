@@ -1676,6 +1676,11 @@ Prefab:
       propertyPath: PresentSpies.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114547673648804584, guid: 2ab07578c3ed5d545bd86576473755c8,
+        type: 2}
+      propertyPath: Stats.Control
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ab07578c3ed5d545bd86576473755c8, type: 2}
   m_IsPrefabParent: 0

@@ -18,8 +18,11 @@ public class FactionDisplay
 			+ "\nNumber of active squads: " + numberOfMilitary;
 	}
 
-	public void Update()
+	public void Update(Globals.FactionNames factionId, int numberOfControlledCities, int numberOfSpies, int numberOfMilitary)
 	{
-
+		_factionDataDisplay.text = "Faction: " + factionId
+			+ "\nCities under control: " + numberOfControlledCities
+			+ "\nNumber of active spies: " + numberOfSpies
+			+ "\nNumber of active squads: " + numberOfMilitary;
 	}
 }

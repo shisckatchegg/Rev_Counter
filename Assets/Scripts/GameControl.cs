@@ -9,9 +9,14 @@ public class GameControl : MonoBehaviour
 
 	public PopulationNode CurrentlySelectedPopulationNode;
 
-	private void Start()
+	private void Awake()
 	{
 		_turnControl = new TurnControl();
+		_turnControl.PreInitializeProcessers();
+	}
+
+	private void Start()
+	{		
 		_turnControl.InitializeProcessers();
 	}
 
@@ -37,10 +42,15 @@ internal class TurnControl
 		_playerStats = new PlayerStatProcesser();
 	}
 
+	public void PreInitializeProcessers()
+	{
+		_playerStats.PreInitialize();
+	}
+
 	public void InitializeProcessers()
 	{
 		_cityStats.Initialize();
-		_unitStats.Initialize();
+		_unitStats.Initialize(_playerStats.GameFactions);
 		_playerStats.Initialize();
 	}
 

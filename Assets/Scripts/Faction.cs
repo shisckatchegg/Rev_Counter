@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Events;
 
 public class Faction
 {
@@ -32,14 +33,16 @@ public class Faction
 		FactionRelationShips = new int[Globals.NumberOfFactions];
 		_factionDataDisplay = new FactionDisplay();
 		
-		CollectControlledPopulationNodes();
-		CollectControlledUnits();
+		OnInitializationCollectControlledPopulationNodes();
+		OnInitializationCollectControlledUnits();
 
 		if (Globals.PlayerFaction == FactionId)
 		{
 			_factionDataDisplay.InitializeTextDisplay();
 			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
 		}
+
+		EventManager.StartListening<UnitRecruitmentData>(EventNames.SpyRecruited, OnRecruitSpy);
 	}
 	
 	public void ExecuteUnitMovementOrders()
@@ -83,23 +86,11 @@ public class Faction
 	public void Update ()
 	{
 		//Unit orders will go here
-		if (Globals.PlayerFaction == FactionId)
-		{
-			_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
-		}
-
-		CollectControlledUnits();
 	}
 
-	//TODO: this vectors are recalculated every turn, adding after every city control change could be quicker
-	private void CollectControlledPopulationNodes()
+	private void OnInitializationCollectControlledPopulationNodes()
 	{
 		GameObject[] populationNodes = GameObject.FindGameObjectsWithTag("PopulationNode");
-
-		if (ControlledSpies != null)
-		{
-			ControlledPopulationNodes.Clear();
-		}
 
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodes.Length; populationNodeIndex++)
 		{
@@ -111,23 +102,23 @@ public class Faction
 		}
 	}
 
-	//TODO: this vectors are recalculated every turn, adding after every unit creation could be quicker
-	private void CollectControlledUnits()
+	private void OnInitializationCollectControlledUnits()
 	{
-		CollectControlledSpies();
+		OnInitializeCollectControlledSpies();
 
-		CollectControlledMilitary();
+		OnInitializeCollectControlledMilitary();
 
-		CollectControlledLeader();
+		OnInitializeCollectControlledLeader();
 	}
     
-	private void CollectControlledSpies()
+	private void OnInitializeCollectControlledSpies()
 	{
 		GameObject[] populationNodeGameobjects = GameObject.FindGameObjectsWithTag("PopulationNode");
 
-		if(ControlledSpies != null)
+		if(populationNodeGameobjects == null)
 		{
-			ControlledSpies.Clear();
+			Debug.Log("OnInitializeCollectControlledSpies - PopulationNode GameObjects not found when looking for controlled spies!");
+			return;
 		}
 
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodeGameobjects.Length; populationNodeIndex++)
@@ -143,13 +134,34 @@ public class Faction
 		}
 	}
 
-	private void CollectControlledMilitary()
+	private void OnRecruitSpy(UnitRecruitmentData newUnitData)
+	{
+		if (newUnitData.NewlyRecruitedUnit is SpyUnit)
+		{
+			if (newUnitData.NewlyRecruitedUnit.Faction == FactionId)
+			{
+				ControlledSpies.Add((SpyUnit)newUnitData.NewlyRecruitedUnit);
+			}
+
+			if (Globals.PlayerFaction == FactionId)
+			{
+				_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+			}
+		}
+		else
+		{
+			Debug.Log("OnRecruitSpy - Unit data is not a spy!");
+		}
+	}
+
+	private void OnInitializeCollectControlledMilitary()
 	{
 		GameObject[] populationNodeGameobjects = GameObject.FindGameObjectsWithTag("PopulationNode");
 
-		if (ControlledMilitary != null)
+		if (populationNodeGameobjects == null)
 		{
-			ControlledMilitary.Clear();
+			Debug.Log("OnInitializeCollectControlledMilitary - PopulationNode GameObjects not found when looking for controlled military!");
+			return;
 		}
 
 		for (int populationNodeIndex = 0; populationNodeIndex < populationNodeGameobjects.Length; populationNodeIndex++)
@@ -165,7 +177,7 @@ public class Faction
 		}
 	}
 
-	private void CollectControlledLeader()
+	private void OnInitializeCollectControlledLeader()
 	{
 
 	}

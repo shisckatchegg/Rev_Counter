@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Events;
+
+public struct UnitRecruitmentData
+{
+	public UnitBase NewlyRecruitedUnit;
+}
 
 public class PopulationNodeSelection : MonoBehaviour
 {
@@ -120,8 +126,11 @@ public class PopulationNodeSelection : MonoBehaviour
 
 	public void RecruitSpy(Globals.FactionNames factionId)
     {
-        SelectedPopulationNode.PresentSpies.Add(new SpyUnit(SelectedPopulationNode, factionId));
-    }
+		SpyUnit newSpy = new SpyUnit(SelectedPopulationNode, factionId);
+		SelectedPopulationNode.PresentSpies.Add(newSpy);
+		EventManager.TriggerEvent(EventNames.SpyRecruited, new UnitRecruitmentData() { NewlyRecruitedUnit = newSpy });
+
+	}
 
     public void PlayerSpyRecruitment()
     {

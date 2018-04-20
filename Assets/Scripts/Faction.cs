@@ -56,6 +56,7 @@ public class Faction
             if (ControlledPopulationNodes[ControlledPopulationNodesIndex].GetComponent<PopulationNode>().Stats.Type == CityType.City)
             {
                 Income += 100;
+                Debug.Log("+100");
             }
             else
             {

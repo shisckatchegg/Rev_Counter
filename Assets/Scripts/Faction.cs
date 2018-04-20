@@ -19,13 +19,15 @@ public class Faction
 	private FactionDisplay _factionDataDisplay;
 
     public PopulationNodeSelection Selection;
+
+    public int Income;
     
     public Faction(Globals.FactionNames factionId)
 	{
 		FactionId = factionId;
 	}
 
-	public void Initialize ()
+    public void Initialize ()
 	{
 		ControlledPopulationNodes = new List<GameObject>();
 		ControlledMilitary = new List<SoldierUnit>();
@@ -36,16 +38,38 @@ public class Faction
 		OnInitializationCollectControlledPopulationNodes();
 		OnInitializationCollectControlledUnits();
 
+        Income = 10000;
+
 		if (Globals.PlayerFaction == FactionId)
 		{
 			_factionDataDisplay.InitializeTextDisplay();
-			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Income);
 		}
 
 		EventManager.StartListening<UnitRecruitmentData>(EventNames.SpyRecruited, OnRecruitSpy);
 	}
 	
-	public void ExecuteUnitMovementOrders()
+    public void Earnings()
+    {
+        for (int ControlledPopulationNodesIndex = 0; ControlledPopulationNodesIndex < ControlledPopulationNodes.Count; ControlledPopulationNodesIndex++)
+        {
+            if (ControlledPopulationNodes[ControlledPopulationNodesIndex].GetComponent<PopulationNode>().Stats.Type == CityType.City)
+            {
+                Income += 100;
+            }
+            else
+            {
+                Income += 50;
+            }
+        }
+
+        if (Globals.PlayerFaction == FactionId)
+        {
+            _factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Income);
+        }
+    }
+
+    public void ExecuteUnitMovementOrders()
 	{
 		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
 		{
@@ -145,10 +169,10 @@ public class Faction
 
 			if (Globals.PlayerFaction == FactionId)
 			{
-				_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count);
+				_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Income);
 			}
-		}
-		else
+        }
+        else
 		{
 			Debug.Log("OnRecruitSpy - Unit data is not a spy!");
 		}

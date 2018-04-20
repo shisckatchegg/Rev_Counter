@@ -63,17 +63,17 @@ public class PopulationNodeSelection : MonoBehaviour
 
 	private List<UnitBase> FilterFactionUnits(List<UnitBase> presentUnits)
 	{
-		List<UnitBase> _ownFactionPresentUnits = new List<UnitBase>();
+		List<UnitBase> ownFactionPresentUnits = new List<UnitBase>();
 
 		for(int unitIndex = 0; unitIndex < presentUnits.Count; unitIndex++)
 		{
 			if(presentUnits[unitIndex].Faction == Globals.PlayerFaction)
 			{
-				_ownFactionPresentUnits.Add(presentUnits[unitIndex]);
+				ownFactionPresentUnits.Add(presentUnits[unitIndex]);
 			}
 		}
 
-		return _ownFactionPresentUnits;
+		return ownFactionPresentUnits;
 	}
 
 	public void InitiateMovement(PopulationNode destination)

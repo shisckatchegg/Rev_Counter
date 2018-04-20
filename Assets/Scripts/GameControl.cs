@@ -6,9 +6,7 @@ public class GameControl : MonoBehaviour
 	private TurnControl _turnControl = null;
 
 	public int TurnNumber;
-
-	public PopulationNode CurrentlySelectedPopulationNode;
-
+	
 	private void Awake()
 	{
 		_turnControl = new TurnControl();
@@ -18,6 +16,11 @@ public class GameControl : MonoBehaviour
 	private void Start()
 	{		
 		_turnControl.InitializeProcessers();
+	}
+
+	private void Update()
+	{
+		
 	}
 
 	public void ProcessGame()
@@ -35,16 +38,21 @@ internal class TurnControl
 
 	public PlayerStatProcesser _playerStats;
 
+	public DecisionMaker _decisionMaker;
+
 	public TurnControl()
 	{
 		_cityStats = new CityStatProcesser();
 		_unitStats = new UnitStatProcesser();
 		_playerStats = new PlayerStatProcesser();
+		_decisionMaker = new DecisionMaker();
 	}
 
 	public void PreInitializeProcessers()
 	{
 		_playerStats.PreInitialize();
+
+		_decisionMaker.PreInitialize();
 	}
 
 	public void InitializeProcessers()
@@ -52,14 +60,19 @@ internal class TurnControl
 		_cityStats.Initialize();
 		_unitStats.Initialize(_playerStats.GameFactions);
 		_playerStats.Initialize();
+
+		_decisionMaker.Initialize(_playerStats.GameFactions);
 	}
 
 	public void ProcessTurn()
 	{
-		_cityStats.Update();
+		_decisionMaker.OnProcessTurn();
 
-		_unitStats.Update();
+		_cityStats.OnProcessTurn();
 
-		_playerStats.Update();
+		_unitStats.OnProcessTurn();
+
+		_playerStats.OnProcessTurn();
+
 	}
 }

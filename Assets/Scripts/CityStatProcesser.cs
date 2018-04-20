@@ -9,7 +9,7 @@ public class CityStatProcesser
 		PopulationNodes = GameObject.FindGameObjectsWithTag("PopulationNode");
 	}
 
-	public void Update()
+	public void OnProcessTurn()
 	{
 		foreach (var populatioNode in PopulationNodes)
 		{

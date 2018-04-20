@@ -8,7 +8,7 @@ public class UnitStatProcesser
 		_gameFactions = GameFactions;
 	}
 
-    public void Update()
+    public void OnProcessTurn()
 	{
         for (int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
         {

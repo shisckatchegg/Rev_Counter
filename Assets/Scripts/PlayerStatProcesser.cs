@@ -20,7 +20,7 @@
 		}
 	}
 
-	public void Update()
+	public void OnProcessTurn()
 	{
 		for (int factionIndex = 0; factionIndex < Globals.NumberOfFactions; factionIndex++)
 		{

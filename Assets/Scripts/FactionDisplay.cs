@@ -10,21 +10,19 @@ public class FactionDisplay
 		_factionDataDisplay = GameObject.Find("FactionInfoDisplay").GetComponent<Text>();
 	}
 
-	public void FirstUpdate(Globals.FactionNames factionId, int numberOfControlledCities, int numberOfSpies, int numberOfMilitary, int income)
+	public void FirstUpdate(Globals.FactionNames factionId, int numberOfControlledCities, int numberOfSpies, int numberOfMilitary)
 	{
 		_factionDataDisplay.text = "Faction: " + factionId
 			+ "\nCities under control: " + numberOfControlledCities
 			+ "\nNumber of active spies: " + numberOfSpies
-			+ "\nNumber of active squads: " + numberOfMilitary
-            + "\nIncome: " + income;
-    }
+			+ "\nNumber of active squads: " + numberOfMilitary;
+	}
 
-    public void Update(Globals.FactionNames factionId, int numberOfControlledCities, int numberOfSpies, int numberOfMilitary, int income)
+	public void Update(Globals.FactionNames factionId, int numberOfControlledCities, int numberOfSpies, int numberOfMilitary)
 	{
-        _factionDataDisplay.text = "Faction: " + factionId
-            + "\nCities under control: " + numberOfControlledCities
-            + "\nNumber of active spies: " + numberOfSpies
-            + "\nNumber of active squads: " + numberOfMilitary
-            + "\nIncome: " + income;
-    }
+		_factionDataDisplay.text = "Faction: " + factionId
+			+ "\nCities under control: " + numberOfControlledCities
+			+ "\nNumber of active spies: " + numberOfSpies
+			+ "\nNumber of active squads: " + numberOfMilitary;
+	}
 }

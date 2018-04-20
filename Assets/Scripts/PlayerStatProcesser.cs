@@ -27,9 +27,7 @@
 			GameFactions[factionIndex].ExecuteUnitAssassinationOrders();
 			GameFactions[factionIndex].ExecutePropagandaOrders();
 			GameFactions[factionIndex].ExecuteUnitMovementOrders();
-            GameFactions[factionIndex].Update();
-            GameFactions[factionIndex].Earnings();
-
-        }
-    }
+			GameFactions[factionIndex].Update();
+		}
+	}
 }

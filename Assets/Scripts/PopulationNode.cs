@@ -10,6 +10,8 @@ public class PopulationNode : MonoBehaviour
 
 	public PopulationNodeSelection PopulationNodeSelection;
 
+	public const float MINIMUM_SPY_RECRUITMENT_SUPPORT = 0.2f;
+
 	private void Awake()
 	{
 		PopulationNodeSelection = GameObject.Find("SelectedPopulationNodeText").GetComponent<PopulationNodeSelection>();
@@ -46,6 +48,25 @@ public class PopulationNode : MonoBehaviour
 		{
 			PopulationNodeSelection.InitiateMovement(this);
 			Debug.Log("City destination selected to move unit: " + Stats.PopulationNodeName);
+		}
+	}
+
+	public void RecruitSpy(Globals.FactionNames factionId)
+	{
+		if (Stats.GetFactionSupport(factionId) >= MINIMUM_SPY_RECRUITMENT_SUPPORT)
+		{
+			SpyUnit newSpy = new SpyUnit(this, factionId);
+			PresentSpies.Add(newSpy);
+			Events.EventManager.TriggerEvent(EventNames.SpyRecruited, new UnitRecruitmentData() { NewlyRecruitedUnit = newSpy });
+			if (Globals.PlayerFaction == factionId)
+			{
+				Debug.Log("-500");
+				//Faction. -= 500;
+			}
+		}
+		else
+		{
+			Debug.Log("The faction: " + factionId.ToString() + " doesn´t have enough support to recruit a spy unit in: " + Stats.PopulationNodeName);
 		}
 	}
 }

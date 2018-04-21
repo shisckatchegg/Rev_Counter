@@ -124,20 +124,8 @@ public class PopulationNodeSelection : MonoBehaviour
 		_selectionDisplay.SelectedSpies = 0;
 	}
 
-	public void RecruitSpy(Globals.FactionNames factionId)
-    {
-		SpyUnit newSpy = new SpyUnit(SelectedPopulationNode, factionId);
-		SelectedPopulationNode.PresentSpies.Add(newSpy);
-		EventManager.TriggerEvent(EventNames.SpyRecruited, new UnitRecruitmentData() { NewlyRecruitedUnit = newSpy });
-        if (Globals.PlayerFaction == factionId)
-        {
-            Debug.Log("-500");
-            //Faction. -= 500;
-        }
-    }
-
     public void PlayerSpyRecruitment()
     {
-        RecruitSpy(Globals.PlayerFaction);
+        SelectedPopulationNode.RecruitSpy(Globals.PlayerFaction);
     }
 }

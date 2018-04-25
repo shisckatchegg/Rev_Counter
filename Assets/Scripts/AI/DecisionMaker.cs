@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using Events;
 
 public class DecisionMaker
@@ -57,8 +58,8 @@ public class DecisionMaker
 	public void OnProcessTurn()
 	{
 		EvaluatePopulationNodeImportances();
-		
-		for(_currentFaction = 0; _currentFaction < AIFactions.Length; _currentFaction++)
+
+		for (_currentFaction = 0; _currentFaction < AIFactions.Length; _currentFaction++)
 		{
 			for (int populationNodeIndex = 0; populationNodeIndex < _populationNodes.Length; populationNodeIndex++)
 			{
@@ -68,8 +69,12 @@ public class DecisionMaker
 				}
 			}
 		}
-	}
 
+		for (_currentFaction = 0; _currentFaction < AIFactions.Length; _currentFaction++)
+		{
+			UnitMovementOrders(_currentFaction);
+		}
+	}
 	private void EvaluateFunds()
 	{
 
@@ -170,6 +175,51 @@ public class DecisionMaker
 	}
 
 	private void EvaluateSpyPresence()
+	{
+
+	}
+
+	private void UnitMovementOrders(int factionIndex)
+	{
+		SpyMovementOrders(factionIndex);
+
+		MilitaryMovementOrder(factionIndex);
+	}
+
+	private void SpyMovementOrders(int factionIndex)
+	{
+		int highestImportanceNode = -1;
+		int lowestImportanceNode = 200;	//maximum importance
+		for(int importanceIndex = 0; importanceIndex < _populationNodeImportances[factionIndex].Length; importanceIndex++)
+		{
+			if(highestImportanceNode < _populationNodeImportances[factionIndex][importanceIndex])
+			{
+				highestImportanceNode = importanceIndex;
+			}
+
+			if(lowestImportanceNode > _populationNodeImportances[factionIndex][importanceIndex])
+			{
+				lowestImportanceNode = importanceIndex;
+			}
+		}
+
+		List<SpyUnit> lowImportancePopulationNodeSpies = _populationNodes[lowestImportanceNode].GetFactionSpies(GetCurrentAIFaction().FactionId);
+
+		if (lowImportancePopulationNodeSpies.Count > 0)
+		{
+			foreach (var spy in lowImportancePopulationNodeSpies)
+			{
+				if (!spy.IsSpyBusy())
+				{
+					spy.InitiateMovement(_populationNodes[highestImportanceNode]);
+
+					Debug.Log("Moving spy from " + _populationNodes[lowestImportanceNode].Stats.PopulationNodeName + " to " + _populationNodes[highestImportanceNode].Stats.PopulationNodeName);
+				}
+			}
+		}
+	}
+
+	private void MilitaryMovementOrder(int factionIndex)
 	{
 
 	}

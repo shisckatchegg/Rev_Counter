@@ -100,7 +100,7 @@ public class PopulationNodeSelection : MonoBehaviour
 		{
 			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
 			{
-				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToAssassinate = true; ;
+				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToAssassinate = true;
 			}
 			spyIndex++;
 		}
@@ -116,7 +116,7 @@ public class PopulationNodeSelection : MonoBehaviour
 		{
 			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
 			{
-				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToSpreadPropaganda = true; ;
+				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToSpreadPropaganda = true;
 			}
 			spyIndex++;
 		}

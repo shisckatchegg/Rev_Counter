@@ -69,4 +69,35 @@ public class PopulationNode : MonoBehaviour
 			Debug.Log("The faction: " + factionId.ToString() + " doesn´t have enough support to recruit a spy unit in: " + Stats.PopulationNodeName);
 		}
 	}
+
+	public List<SpyUnit> GetFactionSpies(Globals.FactionNames factionId)
+	{
+		List<SpyUnit> controlledSpies = new List<SpyUnit>();
+
+		for(int spyIndex = 0; spyIndex < PresentSpies.Count; spyIndex++)
+		{
+			if(PresentSpies[spyIndex].Faction == factionId)
+			{
+				controlledSpies.Add(PresentSpies[spyIndex]);
+			}
+		}
+
+		return controlledSpies;
+	}
+
+	public List<SoldierUnit> GetFactionMilitary(Globals.FactionNames factionId)
+	{
+		List<SoldierUnit> controlledMilitary = new List<SoldierUnit>();
+
+		for (int soldierUnitIndex = 0; soldierUnitIndex < PresentSoldiers.Count; soldierUnitIndex++)
+		{
+			if (PresentSoldiers[soldierUnitIndex].Faction == factionId)
+			{
+				controlledMilitary.Add(PresentSoldiers[soldierUnitIndex]);
+			}
+		}
+
+		return controlledMilitary;
+	}
+
 }

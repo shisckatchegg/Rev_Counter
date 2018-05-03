@@ -15,6 +15,6 @@ public class TurnCounter : MonoBehaviour {
 	//TODO: massively inefficient
 	// Update is called once per frame
 	void Update () {
-		_turDisplay.text = "Turn number: " + _gameControl.TurnNumber.ToString();
+		_turDisplay.text = "Turn: " + _gameControl.TurnNumber.ToString();
 	}
 }

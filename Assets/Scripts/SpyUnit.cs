@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+public struct SpyOdersData
+{
+    public SpyUnit OrderedSpy;
+}
+
 public class SpyUnit : UnitBase
 {
 	[HideInInspector]
@@ -10,7 +15,11 @@ public class SpyUnit : UnitBase
 
 	public bool OrderedToAssassinate;
 	public bool OrderedToMove;
-	public bool OrderedToSpreadPropaganda;
+	private bool _orderedToSpreadPropaganda;
+
+    public bool HasPropagandaBeenOredered(){
+        return _orderedToSpreadPropaganda;
+    }
 
 	public SpyUnit(PopulationNode location, Globals.FactionNames factionId)
 		: base(location, factionId)
@@ -82,16 +91,31 @@ public class SpyUnit : UnitBase
 	{
 		float currentSupport = CurrentLocation.Stats.GetFactionSupport(Faction);
 		CurrentLocation.Stats.SetFactionSupport(Faction, currentSupport + PropagandaBaseEffectiveness);
-		OrderedToSpreadPropaganda = false;
-	}
+		_orderedToSpreadPropaganda = false;
 
-	public void BuildSpyNetwork()
+        //Funds -= 500;
+        //Debug.Log("Faction: " + FactionId + " spreaded propaganda: -500");
+    }
+
+    public void BuildSpyNetwork()
 	{
 
 	}
 
 	public bool IsSpyBusy()
 	{
-		return OrderedToAssassinate || OrderedToMove || OrderedToSpreadPropaganda || CreatedThisTurn;
+		return OrderedToAssassinate || OrderedToMove || _orderedToSpreadPropaganda || CreatedThisTurn;
 	}
+
+    public void OrderToSpreadPropaganda()
+    {
+        _orderedToSpreadPropaganda = true;
+        Events.EventManager.TriggerEvent(EventNames.OrderPropaganda, new SpyOdersData() { OrderedSpy = this });
+
+    }
+
+    public void CancelPropagandaOrder()
+    {
+        _orderedToSpreadPropaganda = false;
+    }
 }

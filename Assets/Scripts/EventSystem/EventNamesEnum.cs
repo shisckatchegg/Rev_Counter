@@ -4,4 +4,5 @@
 	SpyRecruited,
 	MilitaryRecruited,
 	CityControlChange,
+    OrderPropaganda
 }

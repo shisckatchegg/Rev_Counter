@@ -1,24 +1,50 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class SoldierUnit : UnitBase
 {
-	public SoldierUnit(PopulationNode location, Globals.FactionNames factionId)
-		: base(location, factionId)
-	{
+    public bool OrderedToMove;
 
+    public SoldierUnit(PopulationNode location, Globals.FactionNames factionId)
+    : base(location, factionId)
+    {
+
+    }
+
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
 	}
 
-	public override void InitiateMovement(PopulationNode destination)
-	{
-		Destination = destination;
-	}
+    public override void InitiateMovement(PopulationNode destination)
+    {
+        OrderedToMove = true;
+        Destination = destination;
+    }
 
-	public override void ExecuteMovement()
-	{
-		if(Destination != null)
-		{
-			CurrentLocation = Destination;
-			Destination = null;
-		}
-	}
+    public override void ExecuteMovement()
+    {
+        if (Destination != null)
+        {
+            for (int soldierIndex = 0; soldierIndex < CurrentLocation.PresentSoldiers.Count; soldierIndex++)
+            {
+                if (CurrentLocation.PresentSoldiers[soldierIndex] == this)
+                {
+                    CurrentLocation.PresentSoldiers.Remove(this);
+                }
+            }
+
+            Destination.PresentSoldiers.Add(this);
+
+            CurrentLocation = Destination;
+            Destination = null;
+
+            OrderedToMove = false;
+        }
+    }
 }

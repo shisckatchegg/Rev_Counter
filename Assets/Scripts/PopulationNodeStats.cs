@@ -33,6 +33,17 @@ public class PopulationNodeStats
 
 	public CityType Type;
 
+    public int GetIncome() {
+        if (CityType.City == Type)
+        {
+            return 100;
+        }
+        else
+        {
+            return 50;
+        }
+    }
+
 	private const float SUPPORT_DECAY_THRESHOLD = 0.6f;
 	private const float SUPPORT_DECAY_AMOUNT = 0.05f;
 
@@ -43,6 +54,7 @@ public class PopulationNodeStats
 		FactionsSupport = factionsSupport;
 		Population = population;
 		Type = type;
+
 	}
 
 	public void Update()

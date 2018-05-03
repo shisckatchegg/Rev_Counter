@@ -20,8 +20,10 @@ public class Faction
 
     public PopulationNodeSelection Selection;
 
-    public int Income;
-    
+    public int Funds;
+
+    private const int PROPAGANDA_COST = 500;
+
     public Faction(Globals.FactionNames factionId)
 	{
 		FactionId = factionId;
@@ -38,35 +40,29 @@ public class Faction
 		OnInitializationCollectControlledPopulationNodes();
 		OnInitializationCollectControlledUnits();
 
-        Income = 10000;
+        Funds = 10000;
 
 		if (Globals.PlayerFaction == FactionId)
 		{
 			_factionDataDisplay.InitializeTextDisplay();
-			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Income);
+			_factionDataDisplay.FirstUpdate(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
 		}
 
-		EventManager.StartListening<UnitRecruitmentData>(EventNames.SpyRecruited, OnRecruitSpy);
-	}
-	
+        EventManager.StartListening<UnitRecruitmentData>(EventNames.SpyRecruited, OnRecruitSpy);
+        EventManager.StartListening<SpyOdersData>(EventNames.OrderPropaganda, OnPropagandaOrdered);
+    }
+
     public void Earnings()
     {
         for (int ControlledPopulationNodesIndex = 0; ControlledPopulationNodesIndex < ControlledPopulationNodes.Count; ControlledPopulationNodesIndex++)
         {
-            if (ControlledPopulationNodes[ControlledPopulationNodesIndex].GetComponent<PopulationNode>().Stats.Type == CityType.City)
-            {
-                Income += 100;
-                Debug.Log("+100");
-            }
-            else
-            {
-                Income += 50;
-            }
+            Funds += ControlledPopulationNodes[ControlledPopulationNodesIndex].GetComponent<PopulationNode>().Stats.GetIncome();
+            Debug.Log(ControlledPopulationNodes[ControlledPopulationNodesIndex].GetComponent<PopulationNode>().Stats.PopulationNodeName+" +"+ ControlledPopulationNodes[ControlledPopulationNodesIndex].GetComponent<PopulationNode>().Stats.GetIncome());
         }
 
         if (Globals.PlayerFaction == FactionId)
         {
-            _factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Income);
+            _factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
         }
     }
 
@@ -101,12 +97,12 @@ public class Faction
 	{
 		for (int spyUnitIndex = 0; spyUnitIndex < ControlledSpies.Count; spyUnitIndex++)
 		{
-			if (ControlledSpies[spyUnitIndex].OrderedToSpreadPropaganda)
+			if (ControlledSpies[spyUnitIndex].HasPropagandaBeenOredered())
 			{
 				ControlledSpies[spyUnitIndex].ExecutePropagandaCampaign();
-			}
-		}
-	}
+            }
+        }
+    }
 
 	public void Update ()
 	{
@@ -159,25 +155,33 @@ public class Faction
 		}
 	}
 
-	private void OnRecruitSpy(UnitRecruitmentData newUnitData)
-	{
-		if (newUnitData.NewlyRecruitedUnit is SpyUnit)
-		{
-			if (newUnitData.NewlyRecruitedUnit.Faction == FactionId)
-			{
-				ControlledSpies.Add((SpyUnit)newUnitData.NewlyRecruitedUnit);
-			}
+    private void OnRecruitSpy(UnitRecruitmentData newUnitData)
+    {
+        if (Funds >= 500) {
+            if (newUnitData.NewlyRecruitedUnit is SpyUnit)
+            {
+                if ((newUnitData.NewlyRecruitedUnit.Faction == FactionId) & (Funds >= 500))
+                {
+                    ControlledSpies.Add((SpyUnit)newUnitData.NewlyRecruitedUnit);
+                    Funds -= 500;
+                    Debug.Log("Faction: " + FactionId + " recruited a Spy: -500");
+                }
 
-			if (Globals.PlayerFaction == FactionId)
-			{
-				_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Income);
-			}
+                if (Globals.PlayerFaction == FactionId)
+                {
+                    _factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
+                }
+            }
+            else
+            {
+                Debug.Log("OnRecruitSpy - Unit data is not a spy!");
+            }
         }
         else
-		{
-			Debug.Log("OnRecruitSpy - Unit data is not a spy!");
-		}
-	}
+        {
+            Debug.Log("No enough funds!");
+        }
+    }
 
 	private void OnInitializeCollectControlledMilitary()
 	{
@@ -207,5 +211,23 @@ public class Faction
 
 	}
 
+    private void OnPropagandaOrdered(SpyOdersData data)
+    {
+        if(data.OrderedSpy.Faction == FactionId)
+        {
+            if(Funds - PROPAGANDA_COST >= 0)
+            {
+                Funds -= PROPAGANDA_COST;
+                Debug.Log("Faction: " + FactionId + " spreaded propaganda: " + "-" + PROPAGANDA_COST);
+                _factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
+            }
+            else
+            {
+                Debug.Log("Not enough funds to spread propaganda");
+                data.OrderedSpy.CancelPropagandaOrder();
 
+            }
+
+        }
+    }
 }

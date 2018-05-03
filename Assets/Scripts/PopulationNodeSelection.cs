@@ -100,7 +100,7 @@ public class PopulationNodeSelection : MonoBehaviour
 		{
 			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
 			{
-				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToAssassinate = true; ;
+				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToAssassinate = true;
 			}
 			spyIndex++;
 		}
@@ -111,12 +111,18 @@ public class PopulationNodeSelection : MonoBehaviour
 	public void InitiatePropagandaCampaign()
 	{
 		_selectionDisplay.SubmitSelection();
-		int spyIndex = 0;
-		while (spyIndex < _selectionDisplay.SelectedSpies)
+        int spyIndex = 0;
+        int readySpyIndex = 0;
+
+        while (spyIndex < SelectedPopulationNode.PresentSpies.Count)
 		{
 			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
 			{
-				SelectedPopulationNode.PresentSpies[spyIndex].OrderedToSpreadPropaganda = true; ;
+                while (readySpyIndex < _selectionDisplay.SelectedSpies)
+                {
+                    SelectedPopulationNode.PresentSpies[spyIndex].OrderToSpreadPropaganda();
+                    readySpyIndex++;
+                }
 			}
 			spyIndex++;
 		}

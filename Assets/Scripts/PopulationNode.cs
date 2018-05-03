@@ -6,9 +6,9 @@ public class PopulationNode : MonoBehaviour
 	public PopulationNodeStats Stats;
 
 	public List<SoldierUnit> PresentSoldiers;
-	public List<SpyUnit> PresentSpies;
+    public List<SpyUnit> PresentSpies;
 
-	public PopulationNodeSelection PopulationNodeSelection;
+    public PopulationNodeSelection PopulationNodeSelection;
 
 	public const float MINIMUM_SPY_RECRUITMENT_SUPPORT = 0.2f;
 
@@ -58,11 +58,6 @@ public class PopulationNode : MonoBehaviour
 			SpyUnit newSpy = new SpyUnit(this, factionId);
 			PresentSpies.Add(newSpy);
 			Events.EventManager.TriggerEvent(EventNames.SpyRecruited, new UnitRecruitmentData() { NewlyRecruitedUnit = newSpy });
-			if (Globals.PlayerFaction == factionId)
-			{
-				Debug.Log("-500");
-				//Faction. -= 500;
-			}
 		}
 		else
 		{

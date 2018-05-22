@@ -66,6 +66,12 @@ public class SpyUnit : UnitBase
 			}	
 		}
 		
+		if(opposingSpies.Count == 0)
+		{
+			Debug.Log("Tried to assassinate in town where there are no enemy spies: " + CurrentLocation.Stats.PopulationNodeName);
+			return;
+		}
+
 		int randomAssassinationTarget = Random.Range(0, opposingSpies.Count - 1);
 
 		if (Random.Range(0, 100) < AssasinationBaseChance)

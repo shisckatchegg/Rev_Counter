@@ -73,6 +73,8 @@ public class DecisionMaker
 		for (_currentFaction = 0; _currentFaction < AIFactions.Length; _currentFaction++)
 		{
 			UnitMovementOrders(_currentFaction);
+			OrderSpreadPropaganda(_currentFaction);
+			OrderAssassination(_currentFaction);
 		}
 	}
 	private void EvaluateFunds()
@@ -222,5 +224,60 @@ public class DecisionMaker
 	private void MilitaryMovementOrder(int factionIndex)
 	{
 
+	}
+
+
+	private void OrderAssassination(int factionIndex)
+	{
+		int highestImportanceNode = -1;
+		for (int importanceIndex = 0; importanceIndex < _populationNodeImportances[factionIndex].Length; importanceIndex++)
+		{
+			if (highestImportanceNode < _populationNodeImportances[factionIndex][importanceIndex])
+			{
+				highestImportanceNode = importanceIndex;
+			}
+		}
+
+		List<SpyUnit> highImportancePopulationNodeSpies = _populationNodes[highestImportanceNode].GetFactionSpies(GetCurrentAIFaction().FactionId);
+
+		if (highImportancePopulationNodeSpies.Count > 0)
+		{
+			foreach (var spy in highImportancePopulationNodeSpies)
+			{
+				if (!spy.IsSpyBusy())
+				{
+					spy.OrderedToAssassinate = true;
+
+					Debug.Log("Ordering spies to assassinate in: " + _populationNodes[highestImportanceNode].Stats.PopulationNodeName);
+				}
+			}
+		}
+	}
+
+	private void OrderSpreadPropaganda(int factionIndex)
+	{
+		int highestImportanceNode = -1;
+		for (int importanceIndex = 0; importanceIndex < _populationNodeImportances[factionIndex].Length; importanceIndex++)
+		{
+			if (highestImportanceNode < _populationNodeImportances[factionIndex][importanceIndex])
+			{
+				highestImportanceNode = importanceIndex;
+			}
+		}
+
+		List<SpyUnit> highImportancePopulationNodeSpies = _populationNodes[highestImportanceNode].GetFactionSpies(GetCurrentAIFaction().FactionId);
+
+		if (highImportancePopulationNodeSpies.Count > 0)
+		{
+			foreach (var spy in highImportancePopulationNodeSpies)
+			{
+				if (!spy.IsSpyBusy())
+				{
+					spy.OrderToSpreadPropaganda();
+
+					Debug.Log("Ordering spies to spread propaganda in: " + _populationNodes[highestImportanceNode].Stats.PopulationNodeName);
+				}
+			}
+		}
 	}
 }

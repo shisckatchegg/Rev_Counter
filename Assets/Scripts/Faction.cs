@@ -219,8 +219,12 @@ public class Faction
             {
                 Funds -= PROPAGANDA_COST;
                 Debug.Log("Faction: " + FactionId + " spreaded propaganda: " + "-" + PROPAGANDA_COST);
-                _factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
-            }
+				if (Globals.PlayerFaction == FactionId)
+				{
+					_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
+
+				}
+			}
             else
             {
                 Debug.Log("Not enough funds to spread propaganda");

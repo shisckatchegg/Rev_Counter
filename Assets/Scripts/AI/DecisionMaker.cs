@@ -12,7 +12,7 @@ public class DecisionMaker
 
 	private int[][] _populationNodeImportances;
 
-	private int[][] _factionRelations;
+	private FactionRelations _factionRelations;
 
 	public void PreInitialize()
 	{
@@ -23,6 +23,10 @@ public class DecisionMaker
 		{
 			_populationNodes[populationNodeIndex] = populationNodeGameObjects[populationNodeIndex].GetComponent<PopulationNode>();
 		}
+
+		_factionRelations = new FactionRelations();
+
+		_factionRelations.PreInitialize(Globals.NumberOfFactions);
 	}
 
 	public void Initialize(Faction[] factions)
@@ -41,18 +45,14 @@ public class DecisionMaker
 				AIFactionsIndex++;
 			}
 		}
-
-		_factionRelations = new int[AIFactions.Length + 1][];
-		for (int factionIndex = 0; factionIndex < _factionRelations.Length; factionIndex++)
-		{
-			_factionRelations[factionIndex] = new int[AIFactions.Length];
-		}
-
+		
 		_populationNodeImportances = new int[AIFactions.Length][];
 		for (int populationNodeIndex = 0; populationNodeIndex < _populationNodeImportances.Length; populationNodeIndex++)
 		{
 			_populationNodeImportances[populationNodeIndex] = new int[_populationNodes.Length];
 		}
+
+		_factionRelations.Initialize();
 	}
 
 	public void OnProcessTurn()
@@ -76,6 +76,8 @@ public class DecisionMaker
 			OrderSpreadPropaganda(_currentFaction);
 			OrderAssassination(_currentFaction);
 		}
+
+		_factionRelations.OnProcessTurn();
 	}
 	private void EvaluateFunds()
 	{

@@ -51,7 +51,10 @@ public class FactionRelations
 		_factionRelationsText.text = "\tFaction Relations: \n";
 		for (int foreignFactionIndex = 0; foreignFactionIndex < _factionRelations[(int)Globals.PlayerFaction].Length; foreignFactionIndex++)
 		{
-			_factionRelationsText.text +=  ((Globals.FactionNames) foreignFactionIndex).ToString() + ": " + _factionRelations[(int)Globals.PlayerFaction][foreignFactionIndex] + "\n";
+			if (_factionRelations[(int)Globals.PlayerFaction][foreignFactionIndex] != -1)
+			{
+				_factionRelationsText.text += ((Globals.FactionNames)foreignFactionIndex).ToString() + ": " + _factionRelations[(int)Globals.PlayerFaction][foreignFactionIndex] + "\n";
+			}
 		}
 	}
 }

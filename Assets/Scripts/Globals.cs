@@ -7,6 +7,7 @@ public static class Globals
 		//National factions
 		Soviets,
 		Tsarists,
+		SocialistRev,
 
 		//Foreign factions
 		Thaarax,
@@ -16,7 +17,7 @@ public static class Globals
 		NumberOfFactions
 	}
 
-	public static int NumberOfFactions = 2;
+	public static int NumberOfFactions = 3;
 
 	public static FactionNames PlayerFaction = FactionNames.Soviets;
 

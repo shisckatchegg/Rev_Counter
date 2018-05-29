@@ -15,10 +15,13 @@ public class PopulationNodeStatInfoDisplay : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		_populationNodeStatDisplay.text = 
-			_populationNode.Stats.PopulationNodeName 
+		_populationNodeStatDisplay.text =
+			_populationNode.Stats.PopulationNodeName
 			+ "\nPopulation: " + _populationNode.Stats.Population
-			+ "\nControl: " + _populationNode.Stats.Control
-			+ "\nSupport: " + _populationNode.Stats.FactionsSupport[0] + " " + _populationNode.Stats.FactionsSupport[1];
+			+ "\nControl: " + _populationNode.Stats.Control + "\nSupport: ";
+		for (int factionSupportIndex = 0; factionSupportIndex < Globals.NumberOfFactions; factionSupportIndex++)
+		{
+			_populationNodeStatDisplay.text += _populationNode.Stats.FactionsSupport[factionSupportIndex] + " ";
+		}
 	}
 }

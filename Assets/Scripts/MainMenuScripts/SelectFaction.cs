@@ -9,6 +9,7 @@ public class SelectFaction : MonoBehaviour
 
 	private GameObject _sovietFactionButton;
 	private GameObject _tsaristFactionButton;
+	private GameObject _socRevFactionButton;
 
 
 
@@ -20,6 +21,7 @@ public class SelectFaction : MonoBehaviour
 
 		_sovietFactionButton = GameObject.Find("SovietFactionButton");
 		_tsaristFactionButton = GameObject.Find("TsaristFactionButton");
+		_socRevFactionButton = GameObject.Find("SocialistRevolutionariesFactionButton");
 
 	}
 	// Use this for initialization
@@ -27,6 +29,7 @@ public class SelectFaction : MonoBehaviour
 	{
 		_sovietFactionButton.SetActive(false);
 		_tsaristFactionButton.SetActive(false);
+		_socRevFactionButton.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -46,11 +49,13 @@ public class SelectFaction : MonoBehaviour
 		_singlePlayerGameButton.SetActive(false);
 		_loadGameButton.SetActive(false);
 		_quitGameButton.SetActive(false);
+		_socRevFactionButton.SetActive(false);
 	}
 
 	private void ShowFactions()
 	{
 		_sovietFactionButton.SetActive(true);
 		_tsaristFactionButton.SetActive(true);
+		_socRevFactionButton.SetActive(true);
 	}
 }

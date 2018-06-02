@@ -12,6 +12,8 @@ public class SelectFaction : MonoBehaviour
 	private GameObject _socRevFactionButton;
 
 
+	private GameObject _mapsizeDropDown;
+
 
 	private void Awake()
 	{
@@ -23,6 +25,8 @@ public class SelectFaction : MonoBehaviour
 		_tsaristFactionButton = GameObject.Find("TsaristFactionButton");
 		_socRevFactionButton = GameObject.Find("SocialistRevolutionariesFactionButton");
 
+		_mapsizeDropDown = GameObject.Find("Map Size Dropdown");
+
 	}
 	// Use this for initialization
 	void Start()
@@ -30,6 +34,7 @@ public class SelectFaction : MonoBehaviour
 		_sovietFactionButton.SetActive(false);
 		_tsaristFactionButton.SetActive(false);
 		_socRevFactionButton.SetActive(false);
+		_mapsizeDropDown.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -50,6 +55,7 @@ public class SelectFaction : MonoBehaviour
 		_loadGameButton.SetActive(false);
 		_quitGameButton.SetActive(false);
 		_socRevFactionButton.SetActive(false);
+		_mapsizeDropDown.SetActive(false);
 	}
 
 	private void ShowFactions()
@@ -57,5 +63,6 @@ public class SelectFaction : MonoBehaviour
 		_sovietFactionButton.SetActive(true);
 		_tsaristFactionButton.SetActive(true);
 		_socRevFactionButton.SetActive(true);
+		_mapsizeDropDown.SetActive(true);
 	}
 }

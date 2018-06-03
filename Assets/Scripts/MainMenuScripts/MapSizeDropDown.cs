@@ -9,7 +9,8 @@ public class MapSizeDropDown : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 	}
 
@@ -18,13 +19,16 @@ public class MapSizeDropDown : MonoBehaviour {
 		switch ((Globals.MapSizes)choseSize)
 		{
 			case Globals.MapSizes.Small:
-				Globals.CurrentMapSize = new Vector2(2048, 2048);
+				Globals.CurrentMapSize = new Vector2(700, 700);
+				Globals.CurrentMapSizeType = Globals.MapSizes.Small;
 				break;
 			case Globals.MapSizes.Medium:
-				Globals.CurrentMapSize = new Vector2(4096, 4096);
+				Globals.CurrentMapSize = new Vector2(1200, 1200);
+				Globals.CurrentMapSizeType = Globals.MapSizes.Medium;
 				break;
 			case Globals.MapSizes.Large:
-				Globals.CurrentMapSize = new Vector2(8192, 8192);
+				Globals.CurrentMapSize = new Vector2(1800, 1800);
+				Globals.CurrentMapSizeType = Globals.MapSizes.Large;
 				break;
 		}
 	}

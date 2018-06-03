@@ -27,7 +27,7 @@ public static class Globals
 		Large,
 	}
 
-	public static Vector2 CurrentMapSize = new Vector2(2048, 2048);
+	public static Vector2 CurrentMapSize = new Vector2(700, 700);
 	public static MapSizes CurrentMapSizeType = MapSizes.Small;
 
 	public static FactionNames PlayerFaction = FactionNames.Soviets;

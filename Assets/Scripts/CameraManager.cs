@@ -28,6 +28,11 @@ public class CameraManager : MonoBehaviour {
 		bool IsAtScreenEdge = false;
 		if(Input.mousePosition.y > Screen.height * MOVEMENT_MARGIN)
 		{
+			if(ReachedUpperMapEdgeY())
+			{
+				return;
+			}
+
 			float currentVelocity = _velocity + Time.deltaTime * _acceleration;
 			_velocity = currentVelocity > MAX_SCROLLING_SPEED ? MAX_SCROLLING_SPEED : currentVelocity;
 			_mainCameraTransform.Translate(Vector3.up * _velocity, Space.World);
@@ -35,6 +40,11 @@ public class CameraManager : MonoBehaviour {
 		}
 		else if(Input.mousePosition.y < Screen.height - Screen.height * MOVEMENT_MARGIN)
 		{
+			if (ReachedLowerMapEdgeY())
+			{
+				return;
+			}
+
 			float currentVelocity = _velocity + Time.deltaTime * _acceleration;
 			_velocity = currentVelocity > MAX_SCROLLING_SPEED ? MAX_SCROLLING_SPEED : currentVelocity;
 			_mainCameraTransform.Translate(Vector3.down * _velocity, Space.World);
@@ -43,6 +53,11 @@ public class CameraManager : MonoBehaviour {
 
 		if (Input.mousePosition.x > Screen.width * MOVEMENT_MARGIN)
 		{
+			if (ReachedRightMapEdgeX())
+			{
+				return;
+			}
+
 			float currentVelocity = _velocity + Time.deltaTime * _acceleration;
 			_velocity = currentVelocity > MAX_SCROLLING_SPEED ? MAX_SCROLLING_SPEED : currentVelocity;
 			_mainCameraTransform.Translate(Vector3.right * _velocity, Space.World);
@@ -50,6 +65,11 @@ public class CameraManager : MonoBehaviour {
 		}
 		else if (Input.mousePosition.x < Screen.width - Screen.width * MOVEMENT_MARGIN)
 		{
+			if (ReachedLeftMapEdgeX())
+			{
+				return;
+			}
+
 			float currentVelocity = _velocity + Time.deltaTime * _acceleration;
 			_velocity = currentVelocity > MAX_SCROLLING_SPEED ? MAX_SCROLLING_SPEED : currentVelocity;
 			_mainCameraTransform.Translate(Vector3.left * _velocity, Space.World);
@@ -60,5 +80,45 @@ public class CameraManager : MonoBehaviour {
 		{
 			_velocity = 0;
 		}
+	}
+
+	public bool ReachedRightMapEdgeX()
+	{
+		if(Globals.CurrentMapSize.x / 2.0f <= _mainCameraTransform.position.x)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public bool ReachedLeftMapEdgeX()
+	{
+		if (-(Globals.CurrentMapSize.x / 2.0f) >= _mainCameraTransform.position.x)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public bool ReachedUpperMapEdgeY()
+	{
+		if (Globals.CurrentMapSize.y / 2.0f <= _mainCameraTransform.position.y)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public bool ReachedLowerMapEdgeY()
+	{
+		if (-(Globals.CurrentMapSize.y / 2.0f) >= _mainCameraTransform.position.y)
+		{
+			return true;
+		}
+
+		return false;
 	}
 }

@@ -23,6 +23,7 @@ public class MapGenerator : MonoBehaviour {
 	private void GenerateTerrain()
 	{
 		Sprite backgroundSprite = Resources.Load<Sprite>("Sprites/background");
+		Sprite seaBackgroundSprite = Resources.Load<Sprite>("Sprites/seaBackground");
 
 		float backgroundWidth = backgroundSprite.bounds.size.x;
 		float backgroundHeight = backgroundSprite.bounds.size.y;
@@ -30,9 +31,14 @@ public class MapGenerator : MonoBehaviour {
 		int numberOfBackgroundSpritesX = Mathf.CeilToInt(_currentMapSize.x / backgroundWidth);
 		int numberOfBackgroundSpritesY = Mathf.CeilToInt(_currentMapSize.y / backgroundHeight);
 
+		numberOfBackgroundSpritesX += 4;
+		numberOfBackgroundSpritesY += 4;
+		
 		_backgroundObjects = new GameObject[numberOfBackgroundSpritesX, numberOfBackgroundSpritesY];
 
 		Vector3 position = new Vector3(-_currentMapSize.x / 2, -_currentMapSize.y / 2, 5);
+		position.x -= backgroundWidth * 2;
+		position.y -= backgroundHeight * 2;
 		Quaternion rotation = new Quaternion(0, 0, 0, 0);
 
 		for (int x = 0; x < numberOfBackgroundSpritesX; x++)
@@ -42,7 +48,16 @@ public class MapGenerator : MonoBehaviour {
 				_backgroundObjects[x, y] = new GameObject("background");
 
 				_backgroundObjects[x, y].AddComponent<SpriteRenderer>();
-				_backgroundObjects[x, y].GetComponent<SpriteRenderer>().sprite = backgroundSprite;
+
+				if ((x == 0 || x == 1 || x == numberOfBackgroundSpritesX - 2 || x == numberOfBackgroundSpritesX - 1)
+				|| (y == 0 || y == 1 || y == 2 || y == numberOfBackgroundSpritesY - 2 || y == numberOfBackgroundSpritesY - 1))
+				{
+					_backgroundObjects[x, y].GetComponent<SpriteRenderer>().sprite = seaBackgroundSprite;
+				}
+				else
+				{
+					_backgroundObjects[x, y].GetComponent<SpriteRenderer>().sprite = backgroundSprite;
+				}
 
 				_backgroundObjects[x, y].transform.position = position;
 				_backgroundObjects[x, y].transform.rotation = rotation;
@@ -50,6 +65,7 @@ public class MapGenerator : MonoBehaviour {
 			}
 
 			position.y = -_currentMapSize.y / 2;
+			position.y -= backgroundHeight * 2;
 
 			position.x += backgroundWidth;
 		}
@@ -61,20 +77,28 @@ public class MapGenerator : MonoBehaviour {
 
 		_groundColliderObject.AddComponent<BoxCollider2D>();
 
+		Vector2 colliderSize;
 		switch (Globals.CurrentMapSizeType)
 		{
 			case Globals.MapSizes.Small:
-				_groundColliderObject.GetComponent<BoxCollider2D>().size = Globals.SmallMapSize;
+				colliderSize = Globals.SmallMapSize;
 				break;
 			case Globals.MapSizes.Medium:
-				_groundColliderObject.GetComponent<BoxCollider2D>().size = Globals.MediumMapSize;
+				colliderSize = Globals.MediumMapSize;
 				break;
 			case Globals.MapSizes.Large:
-				_groundColliderObject.GetComponent<BoxCollider2D>().size = Globals.LargeMapSize;
+				colliderSize = Globals.LargeMapSize;
+				break;
+			default:
+				Debug.Log("Invalid map size!");
+				colliderSize = new Vector2(200, 200);
 				break;
 		}
 
+		colliderSize.x += 100;
+		colliderSize.y += 100;
 
+		_groundColliderObject.GetComponent<BoxCollider2D>().size = colliderSize;
 		_groundColliderObject.AddComponent<Deselect>();
 	}
 

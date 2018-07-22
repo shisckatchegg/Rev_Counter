@@ -16,6 +16,13 @@ public class DecisionMaker
 
 	public void PreInitialize()
 	{
+		_factionRelations = new FactionRelations();
+
+		_factionRelations.PreInitialize(Globals.NumberOfFactions);
+	}
+
+	public void Initialize(Faction[] factions)
+	{
 		GameObject[] populationNodeGameObjects = GameObject.FindGameObjectsWithTag("PopulationNode");
 
 		_populationNodes = new PopulationNode[populationNodeGameObjects.Length];
@@ -24,13 +31,6 @@ public class DecisionMaker
 			_populationNodes[populationNodeIndex] = populationNodeGameObjects[populationNodeIndex].GetComponent<PopulationNode>();
 		}
 
-		_factionRelations = new FactionRelations();
-
-		_factionRelations.PreInitialize(Globals.NumberOfFactions);
-	}
-
-	public void Initialize(Faction[] factions)
-	{
 		_currentFaction = 0;
 
 		//excluding the player faction

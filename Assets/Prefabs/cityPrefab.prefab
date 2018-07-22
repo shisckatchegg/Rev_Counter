@@ -208,14 +208,13 @@ MonoBehaviour:
     PopulationNodeName: Tale
     Control: 2
     _factionsSupport:
-    - 0.75
+    - 0.65
     - 0.25
+    - 0.1
     Population: 9437
     RecruitmentSlots: 2
     Type: 1
-  PresentSoldiers: []
-  PresentSpies: []
-  _populationNodeSelection: {fileID: 0}
+  PopulationNodeSelection: {fileID: 0}
 --- !u!212 &212525243295228942
 SpriteRenderer:
   m_ObjectHideFlags: 1

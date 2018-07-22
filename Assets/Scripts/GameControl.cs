@@ -10,7 +10,7 @@ public class GameControl : MonoBehaviour
 	private void Awake()
 	{
 		_turnControl = new TurnControl();
-		_turnControl.PreInitializeProcessers();
+		_turnControl.PreInitializeProcessers();	
 	}
 
 	private void Start()

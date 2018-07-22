@@ -198,13 +198,12 @@ MonoBehaviour:
     Control: 1
     _factionsSupport:
     - 0.8
-    - 0.2
+    - 0.1
+    - 0.1
     Population: 2995
     RecruitmentSlots: 1
     Type: 0
-  PresentSoldiers: []
-  PresentSpies: []
-  _populationNodeSelection: {fileID: 0}
+  PopulationNodeSelection: {fileID: 0}
 --- !u!114 &114678081456031628
 MonoBehaviour:
   m_ObjectHideFlags: 1

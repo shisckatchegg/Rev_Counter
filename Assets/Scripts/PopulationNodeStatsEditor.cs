@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 
 [CustomEditor(typeof(PopulationNodeStats))]
 public class PopulationNodeStatsEditor : Editor
@@ -7,4 +8,8 @@ public class PopulationNodeStatsEditor : Editor
 	{
 		DrawDefaultInspector();
 	}
+
 }
+
+#endif
+

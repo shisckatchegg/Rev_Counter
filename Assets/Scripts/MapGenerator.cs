@@ -83,6 +83,7 @@ public class MapGenerator : MonoBehaviour {
 	private void GenerateGroundCollider()
 	{
 		_groundColliderObject = new GameObject("groundCollider");
+		_groundColliderObject.transform.position = new Vector3(0, 0, 5);
 
 		_groundColliderObject.AddComponent<BoxCollider2D>();
 

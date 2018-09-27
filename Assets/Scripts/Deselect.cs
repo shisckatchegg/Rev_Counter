@@ -6,14 +6,18 @@ public class Deselect : MonoBehaviour
     private Text _selectionText;
 	private Text _amountOfSpiesPresent;
 
-	private GameObject _recruitmentButton;
+	private GameObject _spyRecruitmentButton;
 	private GameObject _assasinateButton;
 	private GameObject _propagandaButton;
 	private GameObject _spySelectionGameObject;
 
+	private GameObject _soldierRecruitmentButton;
+	private GameObject _soldierSelectionGameObject;
+	private GameObject _repressButton;
+
 	private void Awake()
 	{
-		_recruitmentButton = GameObject.Find("Recruitment");
+		_spyRecruitmentButton = GameObject.Find("Recruitment");
 
 		_selectionText = GameObject.Find("SelectedPopulationNodeText").GetComponent<Text>();
 
@@ -22,6 +26,10 @@ public class Deselect : MonoBehaviour
 
 		_spySelectionGameObject = GameObject.Find("SpyCounter");
 		_amountOfSpiesPresent = GameObject.Find("AmountOfSpiesPresent").GetComponent<Text>();
+
+		_soldierRecruitmentButton = GameObject.Find("SoldierRecruitment");
+		_soldierSelectionGameObject = GameObject.Find("SoldierCounter");
+		_repressButton = GameObject.Find("RepressButton");
 	}
 
 	// Use this for initialization
@@ -42,7 +50,11 @@ public class Deselect : MonoBehaviour
 
 		_spySelectionGameObject.SetActive(false);
 		_propagandaButton.SetActive(false);
-		_recruitmentButton.SetActive(false);
+		_spyRecruitmentButton.SetActive(false);
 		_assasinateButton.SetActive(false);
+
+		_soldierRecruitmentButton.SetActive(false);
+		_soldierSelectionGameObject.SetActive(false);
+		_repressButton.SetActive(false);
 	}
 }

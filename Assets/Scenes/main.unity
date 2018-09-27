@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 217248372}
   - component: {fileID: 217248371}
   m_Layer: 0
-  m_Name: Repress
+  m_Name: RepressButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1123,6 +1123,14 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.x
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1093234958088444, guid: 2a665ee69c8be4f4c8d75966d4e285c5, type: 2}
+      propertyPath: m_Name
+      value: SoldierInputField
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583847044724302, guid: 2a665ee69c8be4f4c8d75966d4e285c5, type: 2}
+      propertyPath: m_Name
+      value: AmountOfSoldiersPresent
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a665ee69c8be4f4c8d75966d4e285c5, type: 2}

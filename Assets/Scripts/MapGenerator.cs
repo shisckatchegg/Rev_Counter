@@ -156,7 +156,7 @@ public class MapGenerator : MonoBehaviour {
 			PopulationNode populationNode = PopulationNodeGameObjects[populationNodeIndex].GetComponent<PopulationNode>();
 
 			populationNode.Stats.PopulationNodeName = GetPopulationNodeName(Random.Range(0, 11));
-			populationNode.Stats.Control = Random.Range(0, 2);
+			populationNode.Stats.Control = Random.Range(0, Globals.NumberOfFactions);
 			populationNode.Stats.Population = Random.Range(525, 39550);
 
 			populationNode.Stats.SetFactionSupport((Globals.FactionNames)0, Random.Range(0f, 1f));

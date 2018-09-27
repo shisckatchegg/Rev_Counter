@@ -13,7 +13,7 @@ public class CityStatProcesser
 	{
 		foreach (var populatioNode in PopulationNodes)
 		{
-			populatioNode.GetComponent<PopulationNode>().ProcessStats();
+			populatioNode.GetComponent<PopulationNode>().PopulationNodeUpdate();
 		}
 	}
 }

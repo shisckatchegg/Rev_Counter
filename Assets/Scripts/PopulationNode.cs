@@ -12,9 +12,13 @@ public class PopulationNode : MonoBehaviour
 
 	public const float MINIMUM_SPY_RECRUITMENT_SUPPORT = 0.2f;
 
+	private SpriteRenderer _flagRenderer;
+
 	private void Awake()
 	{
 		PopulationNodeSelection = GameObject.Find("SelectedPopulationNodeText").GetComponent<PopulationNodeSelection>();
+
+		_flagRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
 	}
 
 	// Use this for initialization
@@ -22,13 +26,14 @@ public class PopulationNode : MonoBehaviour
 	{
         PresentSoldiers = new List<SoldierUnit>();
         PresentSpies = new List<SpyUnit>();
+		UpdateFlagColor();
+	}
 
-    }
 
-
-    public void ProcessStats()
+    public void PopulationNodeUpdate()
 	{
 		Stats.Update();
+		UpdateFlagColor();
 	}
 
 	// Update is called once per frame
@@ -95,4 +100,26 @@ public class PopulationNode : MonoBehaviour
 		return controlledMilitary;
 	}
 
+
+	private void UpdateFlagColor()
+	{
+		switch((Globals.FactionNames) Stats.Control)
+		{
+			case Globals.FactionNames.Soviets:
+				ApplyNewFlagColor(Color.red);
+				break;
+			case Globals.FactionNames.Tsarists:
+				ApplyNewFlagColor(Color.blue);
+				break;
+			case Globals.FactionNames.SocialistRev:
+				ApplyNewFlagColor(Color.grey);
+				break;
+			
+		}
+	}
+
+	private void ApplyNewFlagColor(Color newColor)
+	{
+		_flagRenderer.color = newColor;
+	}
 }

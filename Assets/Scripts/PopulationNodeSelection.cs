@@ -80,7 +80,8 @@ public class PopulationNodeSelection : MonoBehaviour
 	{
 		_selectionDisplay.SubmitSelection();
 		int spyIndex = 0;
-		while(spyIndex < _selectionDisplay.SelectedSpies)
+		int soldierIndex = 0;
+		while (spyIndex < _selectionDisplay.SelectedSpies)
 		{
 			if (!SelectedPopulationNode.PresentSpies[spyIndex].IsSpyBusy())
 			{
@@ -88,6 +89,18 @@ public class PopulationNodeSelection : MonoBehaviour
 			}
 			spyIndex++;
 		}
+
+		
+		while (soldierIndex < _selectionDisplay.SelectedSoldiers)
+		{
+			//if (!SelectedPopulationNode.PresentSoldiers[soldierIndex].IsSpyBusy())
+			//{
+				SelectedPopulationNode.PresentSoldiers[soldierIndex].InitiateMovement(destination);
+			//}
+			soldierIndex++;
+		}
+
+		_selectionDisplay.SelectedSoldiers = 0;
 
 		_selectionDisplay.SelectedSpies = 0;
 	}
@@ -134,4 +147,9 @@ public class PopulationNodeSelection : MonoBehaviour
     {
         SelectedPopulationNode.RecruitSpy(Globals.PlayerFaction);
     }
+
+	public void PlayerSoldierRecruitment()
+	{
+		SelectedPopulationNode.RecruitSoldier(Globals.PlayerFaction);
+	}
 }

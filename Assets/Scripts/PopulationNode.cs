@@ -13,12 +13,14 @@ public class PopulationNode : MonoBehaviour
 	public const float MINIMUM_SPY_RECRUITMENT_SUPPORT = 0.2f;
 
 	private SpriteRenderer _flagRenderer;
+	private GameObject _campSpriteGameObject;
 
 	private void Awake()
 	{
 		PopulationNodeSelection = GameObject.Find("SelectedPopulationNodeText").GetComponent<PopulationNodeSelection>();
 
 		_flagRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
+		_campSpriteGameObject = transform.GetChild(3).gameObject;
 	}
 
 	// Use this for initialization
@@ -27,13 +29,19 @@ public class PopulationNode : MonoBehaviour
         PresentSoldiers = new List<SoldierUnit>();
         PresentSpies = new List<SpyUnit>();
 		UpdateFlagColor();
+		DisplayCampIfMilitaryPresent();
 	}
 
+
+	public void PopulationNodeGraphicDisplayUpdate()
+	{
+		UpdateFlagColor();
+		DisplayCampIfMilitaryPresent();
+	}
 
     public void PopulationNodeUpdate()
 	{
 		Stats.Update();
-		UpdateFlagColor();
 	}
 
 	// Update is called once per frame
@@ -63,6 +71,20 @@ public class PopulationNode : MonoBehaviour
 			SpyUnit newSpy = new SpyUnit(this, factionId);
 			PresentSpies.Add(newSpy);
 			Events.EventManager.TriggerEvent(EventNames.SpyRecruited, new UnitRecruitmentData() { NewlyRecruitedUnit = newSpy });
+		}
+		else
+		{
+			Debug.Log("The faction: " + factionId.ToString() + " doesn´t have enough support to recruit a spy unit in: " + Stats.PopulationNodeName);
+		}
+	}
+
+	public void RecruitSoldier(Globals.FactionNames factionId)
+	{
+		if (Stats.Control == (int) factionId)
+		{
+			SoldierUnit newSoldier = new SoldierUnit(this, factionId);
+			PresentSoldiers.Add(newSoldier);
+			Events.EventManager.TriggerEvent(EventNames.MilitaryRecruited, new UnitRecruitmentData() { NewlyRecruitedUnit = newSoldier });
 		}
 		else
 		{
@@ -121,5 +143,22 @@ public class PopulationNode : MonoBehaviour
 	private void ApplyNewFlagColor(Color newColor)
 	{
 		_flagRenderer.color = newColor;
+	}
+
+	private void ToggleCampDisplay(bool shouldDisplayCamp)
+	{
+		_campSpriteGameObject.SetActive(shouldDisplayCamp);
+	}
+
+	private void DisplayCampIfMilitaryPresent()
+	{
+		if(PresentSoldiers != null)
+		{
+			ToggleCampDisplay(PresentSoldiers.Count > 0);
+		}
+		else
+		{
+			ToggleCampDisplay(false);
+		}
 	}
 }

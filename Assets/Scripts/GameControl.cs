@@ -74,5 +74,8 @@ internal class TurnControl
 
 		_playerStats.OnProcessTurn();
 
+
+
+		_cityStats.OnProcessTurnGraphics();
 	}
 }

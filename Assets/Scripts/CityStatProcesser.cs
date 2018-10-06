@@ -16,4 +16,12 @@ public class CityStatProcesser
 			populatioNode.GetComponent<PopulationNode>().PopulationNodeUpdate();
 		}
 	}
+
+	public void OnProcessTurnGraphics()
+	{
+		foreach (var populatioNode in PopulationNodes)
+		{
+			populatioNode.GetComponent<PopulationNode>().PopulationNodeGraphicDisplayUpdate();
+		}
+	}
 }

@@ -49,6 +49,7 @@ public class Faction
 		}
 
         EventManager.StartListening<UnitRecruitmentData>(EventNames.SpyRecruited, OnRecruitSpy);
+        EventManager.StartListening<UnitRecruitmentData>(EventNames.MilitaryRecruited, OnRecruitSoldier);
         EventManager.StartListening<SpyOdersData>(EventNames.OrderPropaganda, OnPropagandaOrdered);
     }
 
@@ -182,6 +183,35 @@ public class Faction
             Debug.Log("No enough funds!");
         }
     }
+
+	private void OnRecruitSoldier(UnitRecruitmentData newUnitData)
+	{
+		if (Funds >= 500)
+		{
+			if (newUnitData.NewlyRecruitedUnit is SoldierUnit)
+			{
+				if ((newUnitData.NewlyRecruitedUnit.Faction == FactionId) && (Funds >= 500))
+				{
+					ControlledMilitary.Add((SoldierUnit)newUnitData.NewlyRecruitedUnit);
+					Funds -= 500;
+					Debug.Log("OnRecruitSoldier - Faction: " + FactionId + " recruited a Soldier: -500");
+				}
+
+				if (Globals.PlayerFaction == FactionId)
+				{
+					_factionDataDisplay.Update(FactionId, ControlledPopulationNodes.Count, ControlledSpies.Count, ControlledMilitary.Count, Funds);
+				}
+			}
+			else
+			{
+				Debug.Log("OnRecruitSoldier - Unit data is not a soldier!");
+			}
+		}
+		else
+		{
+			Debug.Log("OnRecruitSoldier - No enough funds!");
+		}
+	}
 
 	private void OnInitializeCollectControlledMilitary()
 	{

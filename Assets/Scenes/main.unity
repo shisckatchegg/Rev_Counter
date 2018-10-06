@@ -578,6 +578,7 @@ GameObject:
   - component: {fileID: 574309148}
   - component: {fileID: 574309150}
   - component: {fileID: 574309149}
+  - component: {fileID: 574309151}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -637,6 +638,31 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 574309147}
   m_CullTransparentMesh: 0
+--- !u!61 &574309151
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 574309147}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -5.066532}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1575.3407, y: 89.866936}
+  m_EdgeRadius: 0
 --- !u!1 &595657609
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,7 +1003,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.600006
+      value: -105.599976
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -1942,7 +1968,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.600006
+      value: -105.599976
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -2360,7 +2386,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: PlayerSpyRecruitment
+        m_MethodName: PlayerSoldierRecruitment
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

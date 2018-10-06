@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Events;
 
 public class PopulationNode : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class PopulationNode : MonoBehaviour
 	void OnMouseDown()
 	{
 		PopulationNodeSelection.InitializeSelection(this);
+		EventManager.TriggerEvent(EventNames.PopulationNodeSelected, new PopulationNodeSelectedEventData() { Control = Stats.Control });
 	}
 
 	private void OnMouseOver()

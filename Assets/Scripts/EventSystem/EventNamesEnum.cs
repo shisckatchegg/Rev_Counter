@@ -4,5 +4,6 @@
 	SpyRecruited,
 	MilitaryRecruited,
 	CityControlChange,
-    OrderPropaganda
+    OrderPropaganda,
+	PopulationNodeSelected,
 }

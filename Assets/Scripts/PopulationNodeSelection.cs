@@ -74,6 +74,11 @@ public class PopulationNodeSelection : MonoBehaviour
 			_leftPanel.SetActive(true);
 			_factionRelations.SetActive(true);
 		}
+		else
+		{
+			_leftPanel.SetActive(false);
+			_factionRelations.SetActive(false);
+		}
 	}
 
 	private List<UnitBase> FilterFactionUnits(List<UnitBase> presentUnits)

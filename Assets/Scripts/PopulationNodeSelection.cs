@@ -16,16 +16,25 @@ public class PopulationNodeSelection : MonoBehaviour
 	private List<SpyUnit> _ownFactionPresentSpies;
 	private List<SoldierUnit> _ownFactionPresentSoldiers;
 
+	private GameObject _leftPanel;
+	private GameObject _factionRelations;
+
 	private void Awake()
 	{
 		_selectionDisplay = new SelectionDisplay();
 		_selectionDisplay.PreInitialization();
+
+		_leftPanel = GameObject.Find("LeftPanel");
+		_factionRelations = GameObject.Find("FactionRelations");
 	}
 
 	// Use this for initialization
 	void Start ()
 	{
 		_selectionDisplay.Initialization();
+
+		_leftPanel.SetActive(false);
+		_factionRelations.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -59,6 +68,12 @@ public class PopulationNodeSelection : MonoBehaviour
 
 
 		_selectionDisplay.FirstUpdate(SelectedPopulationNode.Stats.PopulationNodeName, _ownFactionPresentSoldiers, _ownFactionPresentSpies);
+
+		if (SelectedPopulationNode.Stats.Control != (int)Globals.PlayerFaction)
+		{
+			_leftPanel.SetActive(true);
+			_factionRelations.SetActive(true);
+		}
 	}
 
 	private List<UnitBase> FilterFactionUnits(List<UnitBase> presentUnits)

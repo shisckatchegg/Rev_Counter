@@ -15,6 +15,9 @@ public class Deselect : MonoBehaviour
 	private GameObject _soldierSelectionGameObject;
 	private GameObject _repressButton;
 
+	private GameObject _leftPanel;
+	private GameObject _factionRelations;
+
 	private void Awake()
 	{
 		_spyRecruitmentButton = GameObject.Find("Recruitment");
@@ -30,6 +33,9 @@ public class Deselect : MonoBehaviour
 		_soldierRecruitmentButton = GameObject.Find("SoldierRecruitment");
 		_soldierSelectionGameObject = GameObject.Find("SoldierCounter");
 		_repressButton = GameObject.Find("RepressButton");
+
+		_leftPanel = GameObject.Find("LeftPanel");
+		_factionRelations = GameObject.Find("FactionRelations");
 	}
 
 	// Use this for initialization
@@ -56,5 +62,8 @@ public class Deselect : MonoBehaviour
 		_soldierRecruitmentButton.SetActive(false);
 		_soldierSelectionGameObject.SetActive(false);
 		_repressButton.SetActive(false);
+
+		_leftPanel.SetActive(false);
+		_factionRelations.SetActive(false);
 	}
 }

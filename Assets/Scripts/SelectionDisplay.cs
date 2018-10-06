@@ -54,7 +54,8 @@ public class SelectionDisplay
 
 		_repressButtonGameObject = GameObject.Find("RepressButton");
 		_repressButton = _repressButtonGameObject.GetComponent<Button>();
-    }
+
+	}
 
 	public void Initialization()
 	{
@@ -141,6 +142,7 @@ public class SelectionDisplay
     public void Update(int numberOfSoldiers, int numberOfSpies)
 	{
 		_maximumSpyText.text = numberOfSpies.ToString();
+		_maximumSoldierText.text = numberOfSoldiers.ToString();
 	}
 	
 	private void CheckSpyUnitSelectionIsValid(InputField input)

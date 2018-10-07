@@ -772,7 +772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.46125, y: 0}
   m_AnchorMax: {x: 0.70000005, y: 0.22187802}
-  m_AnchoredPosition: {x: 30.699997, y: 10.056}
+  m_AnchoredPosition: {x: 30.699997, y: 10.055969}
   m_SizeDelta: {x: -119, y: -62.18}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595657611
@@ -1081,7 +1081,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.59985
+      value: -105.59979
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -2540,7 +2540,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.59985
+      value: -105.59979
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -2677,7 +2677,7 @@ GameObject:
   - component: {fileID: 1635318047}
   - component: {fileID: 1635318046}
   m_Layer: 0
-  m_Name: DeclarWareButton
+  m_Name: DeclareWarButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

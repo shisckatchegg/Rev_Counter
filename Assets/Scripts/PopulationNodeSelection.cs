@@ -19,6 +19,10 @@ public class PopulationNodeSelection : MonoBehaviour
 	private GameObject _leftPanel;
 	private GameObject _factionRelations;
 
+	private GameObject _declareWarButton;
+	private GameObject _offerAllianceButton;
+	private GameObject _askToJoinFederationButton;
+
 	private void Awake()
 	{
 		_selectionDisplay = new SelectionDisplay();
@@ -26,6 +30,10 @@ public class PopulationNodeSelection : MonoBehaviour
 
 		_leftPanel = GameObject.Find("LeftPanel");
 		_factionRelations = GameObject.Find("FactionRelations");
+
+		_declareWarButton = GameObject.Find("DeclareWarButton");
+		_offerAllianceButton = GameObject.Find("OfferAllianceButton");
+		_askToJoinFederationButton = GameObject.Find("AskToJoinFederation");
 	}
 
 	// Use this for initialization
@@ -35,6 +43,10 @@ public class PopulationNodeSelection : MonoBehaviour
 
 		_leftPanel.SetActive(false);
 		_factionRelations.SetActive(false);
+
+		_declareWarButton.SetActive(false);
+		_offerAllianceButton.SetActive(false);
+		_askToJoinFederationButton.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -73,11 +85,19 @@ public class PopulationNodeSelection : MonoBehaviour
 		{
 			_leftPanel.SetActive(true);
 			_factionRelations.SetActive(true);
+
+			_declareWarButton.SetActive(true);
+			_offerAllianceButton.SetActive(true);
+			_askToJoinFederationButton.SetActive(true);
 		}
 		else
 		{
 			_leftPanel.SetActive(false);
 			_factionRelations.SetActive(false);
+
+			_declareWarButton.SetActive(false);
+			_offerAllianceButton.SetActive(false);
+			_askToJoinFederationButton.SetActive(false);
 		}
 	}
 

@@ -18,6 +18,10 @@ public class Deselect : MonoBehaviour
 	private GameObject _leftPanel;
 	private GameObject _factionRelations;
 
+	private GameObject _declareWarButton;
+	private GameObject _offerAllianceButton;
+	private GameObject _askToJoinFederationButton;
+
 	private void Awake()
 	{
 		_spyRecruitmentButton = GameObject.Find("Recruitment");
@@ -36,6 +40,10 @@ public class Deselect : MonoBehaviour
 
 		_leftPanel = GameObject.Find("LeftPanel");
 		_factionRelations = GameObject.Find("FactionRelations");
+
+		_declareWarButton = GameObject.Find("DeclareWarButton");
+		_offerAllianceButton = GameObject.Find("OfferAllianceButton");
+		_askToJoinFederationButton = GameObject.Find("AskToJoinFederation");
 	}
 
 	// Use this for initialization
@@ -65,5 +73,9 @@ public class Deselect : MonoBehaviour
 
 		_leftPanel.SetActive(false);
 		_factionRelations.SetActive(false);
+
+		_declareWarButton.SetActive(false);
+		_offerAllianceButton.SetActive(false);
+		_askToJoinFederationButton.SetActive(false);
 	}
 }

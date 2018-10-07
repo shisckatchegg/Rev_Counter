@@ -21,7 +21,11 @@ public class PopulationNodeStatInfoDisplay : MonoBehaviour {
 			+ "\nControl: " + _populationNode.Stats.Control + "\nSupport: ";
 		for (int factionSupportIndex = 0; factionSupportIndex < Globals.NumberOfFactions; factionSupportIndex++)
 		{
-			_populationNodeStatDisplay.text += _populationNode.Stats.FactionsSupport[factionSupportIndex] + " ";
+			if(factionSupportIndex != 0)
+			{
+				_populationNodeStatDisplay.text += " - ";
+			}
+			_populationNodeStatDisplay.text += _populationNode.Stats.FactionsSupport[factionSupportIndex].ToString("0.00");
 		}
 	}
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
 
+	public bool RandomGenerationEnabled = true;
+
 	private Vector2 _currentMapSize;
 
 	private GameObject [,] _backgroundObjects;
@@ -17,13 +19,16 @@ public class MapGenerator : MonoBehaviour {
 
 	private void Awake()
 	{
-		_currentMapSize = Globals.CurrentMapSize;
+		if (RandomGenerationEnabled)
+		{
+			_currentMapSize = Globals.CurrentMapSize;
 
-		GenerateTerrain();
+			GenerateTerrain();
 
-		GenerateGroundCollider();
+			GenerateGroundCollider();
 
-		GeneratePopulation();
+			GeneratePopulation();
+		}
 	}
 
 	private void GenerateTerrain()

@@ -45,6 +45,16 @@ public class SoldierUnit : UnitBase
             Destination = null;
 
             OrderedToMove = false;
+
+			if(CurrentLocation.Stats.Control != (int) Faction)
+			{
+				ConquerPopulationNode(CurrentLocation);
+			}
         }
     }
+
+	private void ConquerPopulationNode(PopulationNode target)
+	{
+		target.Stats.Control = (int)Faction;
+	}
 }

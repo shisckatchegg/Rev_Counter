@@ -6,4 +6,5 @@
 	CityControlChange,
     OrderPropaganda,
 	PopulationNodeSelected,
+	DiplomaticStatusChange,
 }

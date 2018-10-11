@@ -1303,7 +1303,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.59979
+      value: -105.599785
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -1543,7 +1543,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: InitiateAssassination
+        m_MethodName: PlayerOfferAlliance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2327,7 +2327,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: InitiateAssassination
+        m_MethodName: PlayerAskToJoinFederation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3132,7 +3132,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.59979
+      value: -105.599785
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -3334,7 +3334,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: InitiateAssassination
+        m_MethodName: PlayerDeclareWar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

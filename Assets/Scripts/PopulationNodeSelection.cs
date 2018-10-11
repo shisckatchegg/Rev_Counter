@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using Events;
 
 public struct UnitRecruitmentData
@@ -23,9 +24,15 @@ public class PopulationNodeSelection : MonoBehaviour
 	private GameObject _offerAllianceButton;
 	private GameObject _askToJoinFederationButton;
 
+	private DiplomaticActions _diplomaticActions;
+
+	private Text _factionRelationsText;
+
 	private void Awake()
 	{
 		_selectionDisplay = new SelectionDisplay();
+		_diplomaticActions = new DiplomaticActions();
+
 		_selectionDisplay.PreInitialization();
 
 		_leftPanel = GameObject.Find("LeftPanel");
@@ -34,6 +41,8 @@ public class PopulationNodeSelection : MonoBehaviour
 		_declareWarButton = GameObject.Find("DeclareWarButton");
 		_offerAllianceButton = GameObject.Find("OfferAllianceButton");
 		_askToJoinFederationButton = GameObject.Find("AskToJoinFederation");
+
+		_factionRelationsText = GameObject.Find("FactionRelations").GetComponent<Text>();
 	}
 
 	// Use this for initialization
@@ -63,6 +72,7 @@ public class PopulationNodeSelection : MonoBehaviour
 			_ownFactionPresentSoldiers = copiedListOfSoldiers.ConvertAll(x => (SoldierUnit)x);
 
 			_selectionDisplay.Update(_ownFactionPresentSoldiers.Count, _ownFactionPresentSpies.Count);
+			DisplayFactionRelationsWithPlayer((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
 		}
 	}
 
@@ -191,5 +201,48 @@ public class PopulationNodeSelection : MonoBehaviour
 	public void PlayerSoldierRecruitment()
 	{
 		SelectedPopulationNode.RecruitSoldier(Globals.PlayerFaction);
+	}
+
+	public void DisplayFactionRelationsWithPlayer(Globals.FactionNames factionId)
+	{
+		int playerOnFaction = -1;
+		int factionOnPlayer = -1;
+		FactionRelations.GetRelationsWithPlayer(factionId, out playerOnFaction, out factionOnPlayer);
+
+		_factionRelationsText.text = "\tFaction Relations: \n" + "Our views on them: " + playerOnFaction + "\nTheir views on us: " + factionOnPlayer
+			+ "\n Current status: " + FactionRelations.GetRelationStatusWithPlayer(factionId);
+	}
+
+
+	//public void DisplayAllFactionRelations()
+	//{
+	//	_factionRelationsText.text = "\tFaction Relations: \n";
+	//	for (int foreignFactionIndex = 0; foreignFactionIndex < _factionRelations[(int)Globals.PlayerFaction].Length; foreignFactionIndex++)
+	//	{
+	//		if (_factionRelations[(int)Globals.PlayerFaction][foreignFactionIndex] != -1)
+	//		{
+	//			_factionRelationsText.text += ((Globals.FactionNames)foreignFactionIndex).ToString() + ": " + _factionRelations[(int)Globals.PlayerFaction][foreignFactionIndex] + "\n";
+	//		}
+	//	}
+	//}
+
+	public void PlayerDeclareWar()
+	{
+		_diplomaticActions.DeclareWarToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+	}
+
+	public void PlayerOfferPeace()
+	{
+		_diplomaticActions.OfferPeaceToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+	}
+
+	public void PlayerOfferAlliance()
+	{
+		_diplomaticActions.OfferAllianceToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+	}
+
+	public void PlayerAskToJoinFederation()
+	{
+		_diplomaticActions.AskToJoinFederation((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
 	}
 }

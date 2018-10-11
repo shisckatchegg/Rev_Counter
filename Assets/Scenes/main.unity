@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f05ccd2924fe040895a0649ac531d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RandomGenerationEnabled: 1
   PopulationNodeGameObjects: []
   CityPrefab: {fileID: 1333096073479024, guid: 2ab07578c3ed5d545bd86576473755c8, type: 2}
   VillagePrefab: {fileID: 1760528544566822, guid: b03496f413c7d8248a2d1763a2a99e5e,
@@ -1321,7 +1322,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: InitiateAssassination
+        m_MethodName: PlayerOfferAlliance
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1862,7 +1863,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: InitiateAssassination
+        m_MethodName: PlayerAskToJoinFederation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2742,7 +2743,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: InitiateAssassination
+        m_MethodName: PlayerDeclareWar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

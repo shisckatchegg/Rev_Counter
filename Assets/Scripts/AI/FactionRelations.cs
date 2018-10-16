@@ -12,6 +12,97 @@ public enum RelationStatus
 	Federation,
 }
 
+public enum FactionRelationElement
+{
+	Proximity,
+	CurrentStatus,
+	Strength,
+	OccupiedUs,
+	AttackedUs,
+}
+
+public class FactionRelationElementData
+{
+	public int Value;
+	public int TimeToLive;
+	public FactionRelationElement FactionRelationElementId;
+}
+
+public  class FactionRelationData
+{
+	public List<FactionRelationElementData> RelationElements;
+
+	public RelationStatus FactionRelationStatus;
+
+	public FactionRelationData()
+	{
+		RelationElements = new List<FactionRelationElementData>();
+	}
+
+	public void UpdateFactionRelationData()
+	{
+		ProcessTimeToLive();
+		CalculateFactionRelationElementValue();
+	}
+
+	private void ProcessTimeToLive()
+	{
+		RelationElements.ForEach(x => x.TimeToLive--);
+	}
+
+	private void CalculateFactionRelationElementValue()
+	{
+		for(int factionRelationElementDataIndex = 0; factionRelationElementDataIndex < RelationElements.Count; factionRelationElementDataIndex++)
+		{
+			switch(RelationElements[factionRelationElementDataIndex].FactionRelationElementId)
+			{
+				case FactionRelationElement.Proximity:
+					RelationElements[factionRelationElementDataIndex].Value = 10;
+					break;
+				case FactionRelationElement.CurrentStatus:
+					RelationElements[factionRelationElementDataIndex].Value = GetCurrentRelationStatusElementValue();
+					break;
+				case FactionRelationElement.Strength:
+					RelationElements[factionRelationElementDataIndex].Value = 10;
+					break;
+				case FactionRelationElement.OccupiedUs:
+					RelationElements[factionRelationElementDataIndex].Value = 10;
+					break;
+				case FactionRelationElement.AttackedUs:
+					RelationElements[factionRelationElementDataIndex].Value = 10;
+					break;
+			}
+		}
+	}
+
+	private int GetCurrentRelationStatusElementValue()
+	{
+		switch(FactionRelationStatus)
+		{
+			case RelationStatus.Ally:
+				return 20;
+			case RelationStatus.Federation:
+				return 30;
+			case RelationStatus.Peace:
+				return 0;
+			case RelationStatus.War:
+				return -20;
+			default:
+				Debug.Log("GetCurrentRelationStatusElementValue - Invalid FactionRelationStatus: " + FactionRelationStatus.ToString());
+				break;
+		}
+
+		return -1;
+	}
+
+	public int GetRelationsTotal()
+	{
+		int total = 0;
+		RelationElements.ForEach(x => total += x.Value);
+		return total;
+	}
+}
+
 public class FactionRelations
 {
 	private static int[][] _factionRelations;

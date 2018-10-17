@@ -1230,7 +1230,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.59973
+      value: -105.59967
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -1470,7 +1470,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: PlayerOfferAlliance
+        m_MethodName: ShowPlayerOfferAllianceWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2011,7 +2011,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: PlayerAskToJoinFederation
+        m_MethodName: ShowPlayerAskToJoinFederationWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3085,7 +3085,7 @@ Prefab:
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -105.59973
+      value: -105.59967
       objectReference: {fileID: 0}
     - target: {fileID: 224014245569483494, guid: 2a665ee69c8be4f4c8d75966d4e285c5,
         type: 2}
@@ -3287,7 +3287,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1887875967}
-        m_MethodName: PlayerDeclareWar
+        m_MethodName: ShowPlayerDeclareWarWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

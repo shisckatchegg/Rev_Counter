@@ -22,6 +22,8 @@ public class Deselect : MonoBehaviour
 	private GameObject _offerAllianceButton;
 	private GameObject _askToJoinFederationButton;
 
+	private GameObject _windowPrompt;
+
 	private void Awake()
 	{
 		_spyRecruitmentButton = GameObject.Find("Recruitment");
@@ -44,6 +46,8 @@ public class Deselect : MonoBehaviour
 		_declareWarButton = GameObject.Find("DeclareWarButton");
 		_offerAllianceButton = GameObject.Find("OfferAllianceButton");
 		_askToJoinFederationButton = GameObject.Find("AskToJoinFederation");
+
+		_windowPrompt = GameObject.Find("WindowPrompt");
 	}
 
 	// Use this for initialization
@@ -77,5 +81,6 @@ public class Deselect : MonoBehaviour
 		_declareWarButton.SetActive(false);
 		_offerAllianceButton.SetActive(false);
 		_askToJoinFederationButton.SetActive(false);
+		_windowPrompt.SetActive(false);
 	}
 }

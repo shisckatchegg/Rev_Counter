@@ -18,7 +18,8 @@ public class PopulationNodeStatInfoDisplay : MonoBehaviour {
 		_populationNodeStatDisplay.text =
 			_populationNode.Stats.PopulationNodeName
 			+ "\nPopulation: " + _populationNode.Stats.Population
-			+ "\nControl: " + _populationNode.Stats.Control + "\nSupport: ";
+			//+ "\nControl: " + _populationNode.Stats.Control 
+			+ "\nSupport: ";
 		for (int factionSupportIndex = 0; factionSupportIndex < Globals.NumberOfFactions; factionSupportIndex++)
 		{
 			if(factionSupportIndex != 0)

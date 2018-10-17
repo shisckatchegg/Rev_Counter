@@ -28,6 +28,9 @@ public class PopulationNodeSelection : MonoBehaviour
 
 	private Text _factionRelationsText;
 
+	private GameObject _windowPrompt;
+	private Text _windowPromptText;
+
 	private void Awake()
 	{
 		_selectionDisplay = new SelectionDisplay();
@@ -43,6 +46,9 @@ public class PopulationNodeSelection : MonoBehaviour
 		_askToJoinFederationButton = GameObject.Find("AskToJoinFederation");
 
 		_factionRelationsText = GameObject.Find("FactionRelations").GetComponent<Text>();
+
+		_windowPrompt = GameObject.Find("WindowPrompt");
+		_windowPromptText = GameObject.Find("WindowPromptText").GetComponent<Text>();
 	}
 
 	// Use this for initialization
@@ -56,6 +62,8 @@ public class PopulationNodeSelection : MonoBehaviour
 		_declareWarButton.SetActive(false);
 		_offerAllianceButton.SetActive(false);
 		_askToJoinFederationButton.SetActive(false);
+
+		_windowPrompt.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -226,23 +234,74 @@ public class PopulationNodeSelection : MonoBehaviour
 	//	}
 	//}
 
-	public void PlayerDeclareWar()
+	public void ShowPlayerDeclareWarWindow()
+	{
+		_windowPrompt.SetActive(true);
+		_windowPromptText.text = "Do you want to declare war to " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + "?";
+		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
+		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
+
+		acceptButton.onClick.AddListener(PlayerDeclareWarToTarget);
+		cancelButton.onClick.AddListener(delegate { _windowPrompt.SetActive(false); });
+	}
+
+	private void PlayerDeclareWarToTarget()
 	{
 		_diplomaticActions.DeclareWarToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+		_windowPrompt.SetActive(false);
 	}
 
-	public void PlayerOfferPeace()
+	public void ShowPlayerOfferPeaceWindow()
+	{
+		_windowPrompt.SetActive(true);
+		_windowPromptText.text = "Do you want to offer peace to " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + "?";
+
+		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
+		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
+
+		acceptButton.onClick.AddListener(PlayerOfferPeaceToTarget);
+		cancelButton.onClick.AddListener(delegate { _windowPrompt.SetActive(false); });
+	}
+
+	private void PlayerOfferPeaceToTarget()
 	{
 		_diplomaticActions.OfferPeaceToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+		_windowPrompt.SetActive(false);
 	}
 
-	public void PlayerOfferAlliance()
+	public void ShowPlayerOfferAllianceWindow()
+	{
+		_windowPrompt.SetActive(true);
+		_windowPromptText.text = "Do you want to offer an alliance to " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + "?";
+		
+		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
+		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
+
+		acceptButton.onClick.AddListener(PlayerOfferAllianceToTarget);
+		cancelButton.onClick.AddListener(delegate { _windowPrompt.SetActive(false); });
+	}
+
+	private void PlayerOfferAllianceToTarget()
 	{
 		_diplomaticActions.OfferAllianceToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+		_windowPrompt.SetActive(false);
 	}
 
-	public void PlayerAskToJoinFederation()
+	public void ShowPlayerAskToJoinFederationWindow()
+	{
+		_windowPrompt.SetActive(true);
+		_windowPromptText.text = "Do you want to ask " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + " to join our federation?";
+		
+		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
+		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
+
+		acceptButton.onClick.AddListener(PlayerAskToJoinFederationToTarget);
+		cancelButton.onClick.AddListener(delegate { _windowPrompt.SetActive(false); });
+	}
+
+	private void PlayerAskToJoinFederationToTarget()
 	{
 		_diplomaticActions.AskToJoinFederation((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+		_windowPrompt.SetActive(false);
 	}
 }

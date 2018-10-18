@@ -14,6 +14,7 @@ public enum RelationStatus
 
 public enum FactionRelationElement
 {
+	Invalid = -1,
 	Proximity,
 	CurrentStatus,
 	Strength,
@@ -105,17 +106,17 @@ public  class FactionRelationData
 
 public class FactionRelations
 {
-	private static int[][] _factionRelations;
+	private static FactionRelationData[][] _factionRelations;
 	private int _numberOfFactions;
 	private static RelationStatus[][] _factionRelationStatuses;
 
 	public void PreInitialize (int numberOfFactions)
 	{
 		_numberOfFactions = numberOfFactions;
-		_factionRelations = new int[_numberOfFactions][];
+		_factionRelations = new FactionRelationData[_numberOfFactions][];
 		for (int factionIndex = 0; factionIndex < _factionRelations.Length; factionIndex++)
 		{
-			_factionRelations[factionIndex] = new int[_numberOfFactions];
+			_factionRelations[factionIndex] = new FactionRelationData[_numberOfFactions];
 		}
 
 		_factionRelationStatuses = new RelationStatus[numberOfFactions][];
@@ -133,14 +134,16 @@ public class FactionRelations
 		{
 			for (int foreignFactionIndex = 0; foreignFactionIndex < _factionRelations[factionIndex].Length; foreignFactionIndex++)
 			{
+				_factionRelations[factionIndex][foreignFactionIndex] = new FactionRelationData();
 				if (factionIndex == foreignFactionIndex)
 				{
-					_factionRelations[factionIndex][foreignFactionIndex] = -1;
+					_factionRelations[factionIndex][foreignFactionIndex].RelationElements = new List<FactionRelationElementData>();
+					_factionRelations[factionIndex][foreignFactionIndex].RelationElements.Add(new FactionRelationElementData() { Value = -1, FactionRelationElementId = FactionRelationElement.Invalid });
 					_factionRelationStatuses[factionIndex][foreignFactionIndex] = RelationStatus.Invalid;
 				}
 				else
 				{
-					_factionRelations[factionIndex][foreignFactionIndex] = 20;
+					_factionRelations[factionIndex][foreignFactionIndex].RelationElements.Add(new FactionRelationElementData() { Value = 10, FactionRelationElementId = FactionRelationElement.Proximity });
 					_factionRelationStatuses[factionIndex][foreignFactionIndex] = RelationStatus.Peace;
 				}
 			}
@@ -155,14 +158,19 @@ public class FactionRelations
 	{
 		if (Globals.PlayerFaction != factionId)
 		{
-			playerViewOnFaction = _factionRelations[(int)Globals.PlayerFaction][(int)factionId];
-			factionViewOnPlayer = _factionRelations[(int)factionId][(int)Globals.PlayerFaction];
+			playerViewOnFaction = _factionRelations[(int)Globals.PlayerFaction][(int)factionId].GetRelationsTotal();
+			factionViewOnPlayer = _factionRelations[(int)factionId][(int)Globals.PlayerFaction].GetRelationsTotal();
 		}
 		else
 		{
 			playerViewOnFaction = -1;
 			factionViewOnPlayer = -1;
 		}
+	}
+
+	public static List<FactionRelationElementData> GetFactionRelationElementData(Globals.FactionNames factionId)
+	{
+		return _factionRelations[(int)Globals.PlayerFaction][(int)factionId].RelationElements;
 	}
 
 	public static RelationStatus GetRelationStatusWithPlayer(Globals.FactionNames factionId)

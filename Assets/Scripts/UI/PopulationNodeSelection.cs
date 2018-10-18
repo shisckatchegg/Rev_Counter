@@ -217,7 +217,7 @@ public class PopulationNodeSelection : MonoBehaviour
 		int factionOnPlayer = -1;
 		FactionRelations.GetRelationsWithPlayer(factionId, out playerOnFaction, out factionOnPlayer);
 
-		_factionRelationsText.text = "\tFaction Relations: \n" + "Our views on them: " + playerOnFaction + "\nTheir views on us: " + factionOnPlayer
+		_factionRelationsText.text = "\t" + factionId.ToString() + "\n\tFaction Relations: \n" + "Our views on them: " + playerOnFaction + "\nTheir views on us: " + factionOnPlayer
 			+ "\n Current status: " + FactionRelations.GetRelationStatusWithPlayer(factionId);
 	}
 
@@ -233,6 +233,16 @@ public class PopulationNodeSelection : MonoBehaviour
 	//		}
 	//	}
 	//}
+
+	private void AttachFactionRelationsBreakdownToWindowsPromptText(Globals.FactionNames factionId)
+	{
+		List<FactionRelationElementData> relationElements = FactionRelations.GetFactionRelationElementData(factionId);
+		for (int relationElementIndex = 0; relationElementIndex < relationElements.Count; relationElementIndex++)
+		{
+			_windowPromptText.text += relationElements[relationElementIndex].FactionRelationElementId.ToString() + ": "
+				+ relationElements[relationElementIndex].Value + "\n";
+		}
+	}
 
 	public void ShowPlayerDeclareWarWindow()
 	{
@@ -255,7 +265,7 @@ public class PopulationNodeSelection : MonoBehaviour
 	{
 		_windowPrompt.SetActive(true);
 		_windowPromptText.text = "Do you want to offer peace to " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + "?";
-
+		AttachFactionRelationsBreakdownToWindowsPromptText((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
 		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
 		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
 
@@ -266,6 +276,7 @@ public class PopulationNodeSelection : MonoBehaviour
 	private void PlayerOfferPeaceToTarget()
 	{
 		_diplomaticActions.OfferPeaceToFaction((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
+		AttachFactionRelationsBreakdownToWindowsPromptText((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
 		_windowPrompt.SetActive(false);
 	}
 
@@ -273,7 +284,7 @@ public class PopulationNodeSelection : MonoBehaviour
 	{
 		_windowPrompt.SetActive(true);
 		_windowPromptText.text = "Do you want to offer an alliance to " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + "?";
-		
+		AttachFactionRelationsBreakdownToWindowsPromptText((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
 		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
 		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
 
@@ -291,7 +302,7 @@ public class PopulationNodeSelection : MonoBehaviour
 	{
 		_windowPrompt.SetActive(true);
 		_windowPromptText.text = "Do you want to ask " + ((Globals.FactionNames)SelectedPopulationNode.Stats.Control).ToString() + " to join our federation?";
-		
+		AttachFactionRelationsBreakdownToWindowsPromptText((Globals.FactionNames)SelectedPopulationNode.Stats.Control);
 		Button acceptButton = _windowPrompt.transform.GetChild(0).GetComponent<Button>();
 		Button cancelButton = _windowPrompt.transform.GetChild(1).GetComponent<Button>();
 
